@@ -1,0 +1,76 @@
+.video-responsive{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+}
+.video-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+#cap{
+  text-align: center;
+}
+
+#logo{
+  width: 30%;
+  margin: auto;
+}
+
+#social{
+
+  margin-right: 15%;
+  position: relative;
+  width: 90%;
+  background-color: #222222;
+  padding-right: 130;
+
+}
+
+body{
+  background-color: #333333;
+   color:  #eeeeee;
+   font-family: "Montserrat Alternates";
+   font-size:1.6em;
+   margin: 0;
+   text-align: center;
+}
+
+#micanvas{
+  position: absolute;
+  left:0px;
+  top:0px;
+  background-color: #333333;
+  z-index: -1;
+}
+#sellos{
+margin: 10px;
+left: 50px;
+
+}
+.sello{
+padding: 40px;
+vertical-align: middle;
+
+}
+.section{
+  width: 88%;
+  margin: 5%;
+}
+
+.letras{
+    font-family: 'Montserrat Alternates';
+    font-size: 20px;
+    color:#ffffff
+}
+
+a {
+  color: #eeeeee;
+}
+
+#mailme{
+  margin-right: 5%;
+}
