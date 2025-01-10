@@ -99,28 +99,6 @@ function handleComplete(dispon) {
   dispon=null;
 }
 
-var showSlid = document.getElementById("showSli");
-var inmunizinControls=document.getElementById("inmunizingControls")
-showSlid.oninput = function() {
-  if(showSlid.value==0){
-    inmunizingControls.style.visibility="hidden" 
-  }else{
-    inmunizingControls.style.visibility="initial" 
-  }
-  console.log("hide controls?",showSlid.value)
-}
-
-var showSlidRain = document.getElementById("showSliRain");
-var rainContr=document.getElementById("rainControls")
-showSlidRain.oninput = function() {
-  if(showSlidRain.value==0){
-    rainContr.style.display="none" 
-  }else{
-    rainContr.style.display="block" 
-  }
-  console.log("hide controls?",showSlidRain.value)
-}
-
 /* var showRanura = document.getElementById("ranura");
 showRanura.onclick = function() {
  

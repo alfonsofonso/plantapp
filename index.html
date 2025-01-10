@@ -3,95 +3,19 @@
 	<title>lalluvia.com</title>
 
 	<link rel="stylesheet" type="text/css" href="lacss.css">
+	<link rel="stylesheet" type="text/css" href="max.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 
 <body>
-<div class="container" >
-<div id="botContainer" width="99%">
-    <button  id="botRain" onclick="llueve()"  >lluvia</button>
-	<input type="range" min="0" max="1" value="0"  id="showSliRain">
-    <button id="botHeal"  onclick="initHeal();"  >Vibras</button>		
-	<input type="range" min="0" max="1" value="1" id="showSli">
+<div class="screen">
 
+  <button id="botHeal" class="playButt" onclick="initHeal()">((~))</button>
+  <canvas id="micanvas"></canvas>
+  <div id="myProgress">
+    <div id="myBar"><span id="levelUp">LEVEL UP</span></div>
+  </div>
 </div>
- <div class="slidecontainer" >
-
- <div id="rainControls">
- 	**  RAIN Ctrl **
-	<br>
-	 Vol: <span id="volumenRuidoSpan">75</span>
- 	<div width="99%">
-
- 	 <input type="range" min="0" max="100" value="75" class="slider" id="volumenRudio">
-	
- 	 </div>
-	  Freq: <span id="frecuenciaRuidoSpan">850</span> Hz
- 	 <div width="99%">
-
- 	 <input type="range" min="10" max="1000" value="850" class="slider" id="frecuenciaRudio">
-	 
- 	 </div>
-	  Res: <span id="resonanciaRuidoSpan">5</span>
- 	 <div width="99%">
-
- 	 <input type="range" min="1" max="100" class="slider" value="37"
- 	 id="resonanciaRudio">
-
- 	</div>
- 	 	
- 	</div>
-
- 	
-
-	<div id="inmunizingControls">
-		**  FREQUENCY Ctrl **
-	<br>
-		Volume: <span id="volumeSpan">80</span>
-	<div width="99%">
-		<input type="range" min="0" max="100" value="80" class="slider" id="volumeSli">
-	</div>
-
-		Scale: <span id="escalaSpan">pentatonicmajor</span>
-	<div width="99%">
-
- 	 <input type="range" min="0" max="31" value="5" class="slider" id="escalaSli">
- 
- 	 </div>
-	  Duration: <span id="duraSpan">106 </span>  
- 	 <div width="99%">
-
- 	 <input type="range" min="1"  max="100" value="29" class="slider" id="duraSli">
- 	
- 	 </div>
-	  Poliphony: <span id="poliSpan">8</span> 
- 	  <div width="99%"> 
-	
- 	 <input type="range" min="1" max="20" value="8" class="slider" id="poliSli">
-
- 	
- 	 </div>
-	  BaseNote: <span id="baseSpan">C5</span> 
-	<div width="99%">
- 			
- 	 <input type="range" min="24" max="72" value="60" class="slider" id="baseSli">
- 
- 	 </div>
- 	 Tesiture:  <span id="tesiSpan">3</span>
- 	 <div width="99%">
- 			
- 	 <input type="range" min="1" max="6" value="3" class="slider" id="tesiSli">
-
- 	 </div> 
- 	 
-	</div>
-</div>
-</div>
-
-<canvas id="micanvas"></canvas>
-      
-
-<div id="milink"> <a href="about.html">sobre lalluvia</a> </div>
 
 
 <script src="lissajous-master/src/vendor/bufferLoader.js"></script>
@@ -124,15 +48,15 @@
 
 <script src="laJS/visual.js"></script>
 <script src="laJS/planets.js"></script>
-<script src="laJS/midi.js"></script>
-<script src="laJS/midimap.js"></script>
-<script src="laJS/parametros.js"></script>
-<script src="laJS/oido.js"></script>
+<!-- <script src="laJS/midi.js"></script> -->
+<!-- <script src="laJS/midimap.js"></script> -->
+<!-- <script src="laJS/parametros.js"></script>
+<script src="laJS/oido.js"></script> -->
 <script src="laJS/main.js"></script>
 
 <script src="juabascri/p5.js"></script>
 <script src="juabascri/p5.sound.js"></script>
-<script src="laJS/sketch.js"></script> 
+
 
 </body>
 </html>
