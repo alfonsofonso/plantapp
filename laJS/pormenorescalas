@@ -87,3 +87,4 @@ var _scales = {
  'beboptonicminor': [0,2,3,5,7,8,9,11,12],
  'octaves':[0]
 };
+
