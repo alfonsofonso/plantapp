@@ -1,7 +1,7 @@
 //planets
 
 var starLoc=true;//lineas de mirilla
-var velSpacial=500000;
+var velSpacial=50000;
 var radioCircle=2;
 var radioCircleFinal=24;
 var gris=255;

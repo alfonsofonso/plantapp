@@ -3,8 +3,16 @@
   z-index: 13;
 }
 
+.label {
+  color: white;
+}
+#user-name {
+  color: white;
+}
+
 .screen {
   display: flex;
+  flex-direction: column;
   height: 100%;
   align-content: center;
   justify-items: center;

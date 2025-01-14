@@ -6,14 +6,14 @@ var numeroDeOctavas=3;
 var nivel = 0;
 var nubes=[];
 var numNubes=1;
-var duracion=106;
+var duracion=16;
 var maxDuracion=1251;
 var escalas=['ionian','melodicminor','wholetone','diminished','blues','pentatonicmajor',
  'pentatonicminor','flamenco','altered','bebopdominant','bebopdominantflatnine',
  'bebopmajor','bebopminor','major','major7','major6','dominant','dominantflat5',"augmented",
  'minor','minor7','minor6','dim','minorflat5','sus4','sus2','fouths','fifth','tritone',
  'hexatonic','chromatic',"octaves"];
-var aroma="pentatonicmajor";
+var aroma="sus4";
 var grupo;
 var nombresNotas=["C", "Db", "D", "Eb", "E","F", "Gb", "G", "Ab", "A", "Bb", "B" ];
 var barSpeed = 15;
@@ -48,12 +48,18 @@ function barAnimation() {
   }
 }
 
-function initHeal(){
+  
+  function initHeal(){
+    console.log("puto")
+    document.getElementById('startForm').style.display= 'none';
+    const userName = document.getElementById('userName').value;
+    document.getElementById('game').style.display= 'block';
   document.getElementById('botHeal').style.display= 'none';
-  document.getElementById('myProgress').style.display= 'block';
-  document.getElementById('myBar').style.display= 'block';
-  barAnimation();
-  console.log("puto")
+  document.getElementById('user-name').innerText= userName;
+  document.getElementById('myProgress').style.display= 'block';/*
+  document.getElementById('myBar').style.display= 'block'; */
+/*   document.getElementById('micanvas').style.display= 'block';
+ */  barAnimation();
 	if(context.state!="runing"){
 		context.resume();
 	}

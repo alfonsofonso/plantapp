@@ -9,11 +9,18 @@
 
 <body>
 <div class="screen">
-
+  <form id='startForm' action="#" method="post">
+    <label class='label' for="userName">Enter your name</label>
+    <input type="text" id="userName" value="">
+  </form>
   <button id="botHeal" class="playButt" onclick="initHeal()">((~))</button>
-  <canvas id="micanvas"></canvas>
-  <div id="myProgress">
-    <div id="myBar"><span id="levelUp">LEVEL UP</span></div>
+  
+  <div id="game">
+    <h4 id="user-name"></h4>
+    <canvas id="micanvas"></canvas>
+    <div id="myProgress">
+      <div id="myBar"><span id="levelUp">LEVEL UP</span></div>
+    </div>
   </div>
 </div>
 
