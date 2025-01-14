@@ -67,7 +67,7 @@ window.onresize = function(event) {
   ajustaCanvas()
   resizeCanvas(amp,alt);clear();
 }
-
+ 
 ajustaCanvas=function(){
   amp=canvasContext.width  = window.innerWidth-10;
   alt=canvasContext.height = window.innerHeight-20;
