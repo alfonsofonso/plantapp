@@ -36,12 +36,25 @@
   display: none;
   opacity: 0.5;
   width: 80%;
-  height: 5vh;
+  height: 1vh;
   background-color: #ddd;
-  border-radius: 12%;
+   border-radius: 42%;
 }
 #myBar {
   width: 1%;
   height: 100%;
-  background-color: #04AA6D;
+  background-color: #a0ff10;
+  border-radius: 42%;
+}
+#levelUp{
+  top: -10;
+  color: #a0ff10
+}
+
+.addOnButt {
+  color: #a0ff10;
+  
+}
+#botones{
+  display: none
 }

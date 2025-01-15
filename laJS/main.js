@@ -1,12 +1,12 @@
 //// main.js
 //////////////////////////////////////////     globales   //////////////////////////////
 var mainVol=0.8;
-var notaBase=60;// C
+var notaBase=60;//
 var numeroDeOctavas=3;
 var nivel = 0;
 var nubes=[];
 var numNubes=1;
-var duracion=16;
+var duracion=50;
 var maxDuracion=1251;
 var escalas=['ionian','melodicminor','wholetone','diminished','blues','pentatonicmajor',
  'pentatonicminor','flamenco','altered','bebopdominant','bebopdominantflatnine',
@@ -16,7 +16,7 @@ var escalas=['ionian','melodicminor','wholetone','diminished','blues','pentatoni
 var aroma="sus4";
 var grupo;
 var nombresNotas=["C", "Db", "D", "Eb", "E","F", "Gb", "G", "Ab", "A", "Bb", "B" ];
-var barSpeed = 15;
+var barSpeed = 16;
 //////////////////////////////////////////     instrumentos   //////////////////////////////
 var elem = document.getElementById("myBar");
 
@@ -27,9 +27,9 @@ function barAnimation() {
   if (i == 0) {
     i = 1;
     var width = 1;
-    var id = setInterval(frame, 1000);
+    var id = setInterval(frame, 100);
     function frame() {
-      console.log(width)
+      //console.log(width)
       if (width >= 1000) {
         clearInterval(id);
         i = 0;
@@ -80,11 +80,10 @@ function creaArr(){//n=num notas
 	return [numNubes,aroma,duracion]
 
 }
-yuxtapon=function(q){
+yuxtapon=function(q){///???
  return q=q.replace(/\s/g, '');
 
 }
-
 function destruyeArr(){// vacia nubes
 	console.log("diluyo nubes: "+nubes.length)
 	for(var i=0;i<nubes.length;i++){
@@ -94,12 +93,6 @@ function destruyeArr(){// vacia nubes
 	nubes=[];
 }
 
-
-
-retrocede=function(arr){
-	dale(historia[momentoHistorico-1])
-}
-
 resetea=function(){
 	if(healing){
 		initHeal()
@@ -107,14 +100,6 @@ resetea=function(){
 }
 
 
-function aleatoria(){
-	numNubes=Math.ceil(Math.random()*maxNubes);
-	aroma=escalas[Math.floor(Math.random()*escalas.length)];
-	duracion=Math.ceil(Math.random()*maxDuracion);
-	poliSlid.value=numNubes;poliSpan.innerText=numNubes;
-	escaSlid.value=escalas.indexOf(aroma);escalaSpan.innerText=aroma;
-	duraSlid.value=duracion;duraSpan.innerText=duracion;
-}
 //////////////////////////////////////////     start    //////////////////////////////
 function quitaBot(){
 	let b=	document.getElementById("botHeal");

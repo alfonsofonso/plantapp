@@ -27,13 +27,15 @@ function ponEstrella(a,v,s){// es un circulo-planta-cuadrado-nave
   equis=(radius/(2 + Math.random()*20) )* Math.cos(ang) + amp/2;
   igriega=(radius/(2 + Math.random()*20) ) * Math.abs(Math.sin(ang))+alt/2;
 
-  vel=velSpacial;/// nope
+  vel=duracion*256//// atenncios
+  //vel=velSpacial;/// nope
 
   let radioVel=radioCircle///////////////
   if(radioVelo){radioVel*v/10}
   if (grisRandom){gris=Math.random()*512}//////////////
   var c = new createjs.Shape();
-  let micolor="rgb("+gris/2+","+gris+","+gris/2+")";
+  let micolor="rgb(0   255 0)"//
+  micolor="rgb("+gris/2+" 255 "+gris/2+")";
 
   c.graphics.beginFill(micolor)
   //rgbToHex(Math.round(256*s),Math.round(256*s),Math.round(256*s)))
