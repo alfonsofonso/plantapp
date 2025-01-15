@@ -11,8 +11,9 @@
 }
 
 #game{
-  position: absolute;
-
+  position: relative;
+  width: 100%;
+  height: 100vh;
 }
 
 .screen {
@@ -21,6 +22,7 @@
   height: 100%;
   align-content: center;
   justify-items: center;
+  position: relative;
 }
 
 #startPoint{
@@ -31,33 +33,24 @@
   font-size: 2em;
 }
 #myProgress {
-  
+  position: absolute;
   left:10%;
-  /* top: calc(100% - 50px); /* Example: 50px below #startPoint */
-
   bottom: 2vh;
-/*    position: absolute;
- border: 3px solid blue;
- */  box-sizing: border-box;
-  font-size: 1em;
+  box-sizing: border-box;
   display: none;
   opacity: 0.5;
   width: 80%;
-  height: 1vh;
+  height: 3vh;
   background-color: #ddd;
-   border-radius: 42%;
-   top:99px;
-   z-index: 22;
+  border-radius: 42%;
+  z-index: 22;
 }
 #myBar {
-  width: 1%;
+  width: 10%;
   height: 100%;
   background-color: #a0ff10;
   border-radius: 42%;
-}
-#levelUp{
-  top: -10;
-  color: #a0ff10
+  position: absolute;
 }
 
 .addOnButt {
@@ -66,6 +59,6 @@
 }
 #botones{
   display: none;
-  position:absolute
-
+  position:absolute;
+  bottom: 10vh;
 }

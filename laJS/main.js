@@ -6,7 +6,7 @@ var numeroDeOctavas=3;
 var nivel = 0;
 var nubes=[];
 var numNubes=1;
-var duracion=50;
+var duracion=levels[0].duracion;
 var maxDuracion=1251;
 var escalas=['ionian','melodicminor','wholetone','diminished','blues','pentatonicmajor',
  'pentatonicminor','flamenco','altered','bebopdominant','bebopdominantflatnine',
@@ -16,13 +16,23 @@ var escalas=['ionian','melodicminor','wholetone','diminished','blues','pentatoni
 var aroma="sus4";
 var grupo;
 var nombresNotas=["C", "Db", "D", "Eb", "E","F", "Gb", "G", "Ab", "A", "Bb", "B" ];
-var barSpeed = 16;
 //////////////////////////////////////////     instrumentos   //////////////////////////////
-var elem = document.getElementById("myBar");
+var barra = document.getElementById("myBar");
 
+var i = 0;
+const subeNivel = () => {
+  nivel++;
+  duracion = levels[nivel].duracion;
+  console.log('nivel:', nivel, duracion);
+  i = 0;
+  barra.style.width = '0%';
+
+  document.getElementById('botones').removeChild(document.getElementById('aob'));
+  document.getElementById('botones').style.display = 'none';
+  barAnimation()
+}
 
 //////////////////////////////////////////     functions   //////////////////////////////
-var i = 0;
 function barAnimation() {
   if (i == 0) {
     i = 1;
@@ -34,15 +44,20 @@ function barAnimation() {
         clearInterval(id);
         i = 0;
         width = 1;
-        window.document.getElementById('levelUp').style.display="inline";
         const botones = window.document.getElementById('botones')
         botones.style.display="block";
+        const boton = document.createElement('button');
+        boton.className= 'addOnButt';
+        boton.id = 'aob'
+        boton.onclick = subeNivel;
+        boton.innerText = levels[nivel].feature;
+        botones.appendChild(boton);
 
         //elem.style.width = 0;
         return ;
       } else {
-        width += barSpeed;
-        elem.style.width = width/10 + "%";
+        width += duracion*3;
+        barra.style.width = width/10 + "%";
       }
     }
   }
@@ -56,14 +71,15 @@ function barAnimation() {
     document.getElementById('game').style.display= 'block';
   document.getElementById('botHeal').style.display= 'none';
   document.getElementById('user-name').innerText= userName;
-  document.getElementById('myProgress').style.display= 'block';/*
-  document.getElementById('myBar').style.display= 'block'; */
+  document.getElementById('myProgress').style.display= 'block';
+  document.getElementById('myBar').style.display= 'block'; 
 /*   document.getElementById('micanvas').style.display= 'block';
  */  barAnimation();
 	if(context.state!="runing"){
 		context.resume();
 	}
 	creaArr();
+  nivel++;
 }
 
 function creaArr(){//n=num notas	
