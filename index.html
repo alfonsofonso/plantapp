@@ -8,23 +8,25 @@
 </head>
 
 <body>
+  <canvas id="micanvas"></canvas>
 <div class="screen">
   <form id='startForm' action="#" method="post">
     <label class='label' for="userName">Enter your name</label>
     <input type="text" id="userName" value="">
   </form>
-  <button id="botHeal" class="playButt" onclick="initHeal()">((~))</button>
+  <button id="botHeal" class="playButt" onclick="initHeal()">((-))</button>
   
   <div id="game">
     <h4 id="user-name"></h4>
-    <canvas id="micanvas"></canvas>
+   
     <div id="botones">
       <div class="addOnButt" id="aob1" onclick="addArmonic()">test1</div>
       <div class="addOnButt" id="aob2" onclick="addArmonic(2)">test2</div>
     </div>
-    <div id="myProgress">
-      <div id="myBar"><span id="levelUp">LEVEL UP</span></div>
-    </div>
+  
+  </div>
+  <div id="myProgress">
+    <div id="myBar"><span id="levelUp">LEVEL UP</span></div>
   </div>
 </div>
 
