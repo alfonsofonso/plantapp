@@ -39,7 +39,6 @@ escribe=function(t){/// input orders
 function initVisual(){
   ajustaCanvas();
   funVisuals=[ponEstrella];
-  document.bgColor="black";
 }
 
 function info(){

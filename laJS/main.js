@@ -17,7 +17,14 @@ var aroma="sus4";
 var grupo;
 var nombresNotas=["C", "Db", "D", "Eb", "E","F", "Gb", "G", "Ab", "A", "Bb", "B" ];
 //////////////////////////////////////////     instrumentos   //////////////////////////////
-var barra = document.getElementById("myBar");
+const barra = document.getElementById("myBar");
+const botones = document.getElementById('botones');
+const startForm = document.getElementById('startForm')
+const game = document.getElementById('game')
+const  botHeal = document.getElementById('botHeal')
+const  userName = document.getElementById('user-name')
+const  myProgress = document.getElementById('myProgress')
+const  myBar=  document.getElementById('myBar'); 
 
 var i = 0;
 const subeNivel = () => {
@@ -27,8 +34,8 @@ const subeNivel = () => {
   i = 0;
   barra.style.width = '0%';
 
-  document.getElementById('botones').removeChild(document.getElementById('aob'));
-  document.getElementById('botones').style.display = 'none';
+  botones.removeChild(document.getElementById('aob'));
+  botones.style.display = 'none';
   barAnimation()
 }
 
@@ -44,7 +51,6 @@ function barAnimation() {
         clearInterval(id);
         i = 0;
         width = 1;
-        const botones = window.document.getElementById('botones')
         botones.style.display="block";
         const boton = document.createElement('button');
         boton.className= 'addOnButt';
@@ -65,16 +71,15 @@ function barAnimation() {
 
   
   function initHeal(){
+    const user = document.getElementById('user').value;
     console.log("puto")
-    document.getElementById('startForm').style.display= 'none';
-    const userName = document.getElementById('userName').value;
-    document.getElementById('game').style.display= 'block';
-  document.getElementById('botHeal').style.display= 'none';
-  document.getElementById('user-name').innerText= userName;
-  document.getElementById('myProgress').style.display= 'block';
-  document.getElementById('myBar').style.display= 'block'; 
-/*   document.getElementById('micanvas').style.display= 'block';
- */  barAnimation();
+    startForm.style.display= 'none';
+    game.style.display= 'block';
+    botHeal.style.display= 'none';
+    userName.innerText= user;
+    myProgress.style.display= 'block';
+    myBar.style.display= 'block'; 
+    barAnimation();
 	if(context.state!="runing"){
 		context.resume();
 	}
@@ -117,11 +122,6 @@ resetea=function(){
 
 
 //////////////////////////////////////////     start    //////////////////////////////
-function quitaBot(){
-	let b=	document.getElementById("botHeal");
-	b.remove();
-	context.resume();
-}
 
 function empieza(){
 	console.log("empiezo")
@@ -129,17 +129,4 @@ function empieza(){
 	clock.tempo=100;
 }
 
-volumenSounds=function(volu){
-	mainVol=volu;
-	for(var i=0;i<numNubes;i++){
-	nubes[i].vol(mainVol*0.2/nubes.length)
-	console.log("bajando")
-	}
-}
 
-function replega(){
-	for (let i = 0; i < nubes.length; i++) {
-		viaja(stage.children[i],423,-2.1,2,333);
-		console.log("stop")
-	  }
-}
