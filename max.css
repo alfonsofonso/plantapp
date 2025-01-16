@@ -1,8 +1,70 @@
-.playButt {
-  margin:auto;
+:root {
+  --accent: #b8fe1eff;
+  --dark: rgb(79, 79, 3);
+  --white: rgb(240, 244, 237);
+  --black: rgb(3, 3, 1);
+  --red: #a71d31ff;
+  --gradient-top: linear-gradient(0deg, var(--black), var(--dark));
+  font-family: "Kode Mono", monospace;
+}
+body {
+  background: var(--gradient-top);
+}
+#startForm {
   z-index: 13;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vh;
+  align-content: center;
+  justify-items: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+}
+#user {
+  width: 60%;
+  margin: auto;
+  border-radius: 8%;
+  background-color: var(--dark);
+  border-color: var(--accent);
+}
+::placeholder {
+  color: var(--white);
+  opacity: 1; /* Firefox */
 }
 
+::-ms-input-placeholder { /* Edge 12 -18 */
+  color: var(--white);
+}
+input[type="text"]{
+  text-align: center;
+}
+#miCanvas{
+  position: absolute;
+  z-index: -1312;
+/*   display: none; */
+}
+#playButt {
+  margin:auto;
+  z-index: 13;
+  padding: 20px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: var(--black);
+  border: 3px solid var(--dark);
+  aspect-ratio: 1;
+}
+#logo {
+  margin: 0;
+  animation: mymove 5s infinite;
+}
+@keyframes mymove {
+  50% {opacity: 0;}
+}
 .label {
   color: white;
 }
@@ -37,8 +99,8 @@
   left:10%;
   bottom: 2vh;
   box-sizing: border-box;
+  overflow: hidden;
   display: none;
-  opacity: 0.5;
   width: 80%;
   height: 3vh;
   background-color: #ddd;

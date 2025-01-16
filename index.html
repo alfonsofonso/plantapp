@@ -2,8 +2,9 @@
 <head>
 	<title>lalluvia.com</title>
 
-	<link rel="stylesheet" type="text/css" href="lacss.css">
+	<!-- <link rel="stylesheet" type="text/css" href="lacss.css"> -->
 	<link rel="stylesheet" type="text/css" href="max.css">
+  <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 
@@ -11,10 +12,9 @@
   <canvas id="micanvas"></canvas>
 <div class="screen">
   <div id='startForm'>
-    <label class='label' for="user">Enter your name</label>
-    <input type="text" id="user" value="">
+    <input placeholder="your name" type="text" id="user" value="">
+    <button id="playButt" onclick="initHeal(event)"><h1 id="logo">((-))</h1></button>
   </div>
-  <button id="botHeal" class="playButt" onclick="initHeal()">((-))</button>
   
   <div id="game">
     <h4 id="user-name"></h4>

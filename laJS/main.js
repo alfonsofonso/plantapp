@@ -21,7 +21,7 @@ const barra = document.getElementById("myBar");
 const botones = document.getElementById('botones');
 const startForm = document.getElementById('startForm')
 const game = document.getElementById('game')
-const  botHeal = document.getElementById('botHeal')
+const  playButt = document.getElementById('playButt')
 const  userName = document.getElementById('user-name')
 const  myProgress = document.getElementById('myProgress')
 const  myBar=  document.getElementById('myBar'); 
@@ -70,12 +70,12 @@ function barAnimation() {
 }
 
   
-  function initHeal(){
+  function initHeal(event){
+    event.preventDefault()
     const user = document.getElementById('user').value;
     console.log("puto")
     startForm.style.display= 'none';
     game.style.display= 'block';
-    botHeal.style.display= 'none';
     userName.innerText= user;
     myProgress.style.display= 'block';
     myBar.style.display= 'block'; 
