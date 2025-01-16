@@ -1,19 +1,19 @@
 const levels = [
   {
     id: 0,
-    duracion: 6,
+    speed: 6,
     feature : 'name',
     armonic : []
   },
   {
     id: 1,
-    duracion: 60,
+    speed: 60,
     feature : 'altura',
     armonic : []
   },
   {
     id: 2,
-    duracion: 80,
+    speed: 80,
     feature : 'peso',
     armonic : []
   }

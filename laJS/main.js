@@ -6,7 +6,8 @@ var numeroDeOctavas=3;
 var nivel = 0;
 var nubes=[];
 var numNubes=1;
-var duracion=levels[0].duracion;
+var duracion = 60;
+var barSpeed=levels[0].speed;
 var maxDuracion=1251;
 var escalas=['ionian','melodicminor','wholetone','diminished','blues','pentatonicmajor',
  'pentatonicminor','flamenco','altered','bebopdominant','bebopdominantflatnine',
@@ -62,7 +63,7 @@ function barAnimation() {
         //elem.style.width = 0;
         return ;
       } else {
-        width += duracion*3;
+        width += barSpeed;
         barra.style.width = width/10 + "%";
       }
     }
