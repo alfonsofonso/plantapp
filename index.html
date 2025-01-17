@@ -15,12 +15,23 @@
     <input placeholder="your name" type="text" id="user" value="">
     <button id="playButt" onclick="initHeal(event)"><h1 id="logo">((-))</h1></button>
   </div>
-  
   <div id="game">
-    <h4 id="user-name"></h4>
-    <div id="botones"></div>
+    <div class="userdata">
+      <h4 id="user-name"></h4>
+    </div>
+    <div id="botones">
+      <button disabled onclick="showLevelInput()" id="levelUP"></button>
+    </div>
     <div id="myProgress">
       <div id="myBar"></div>
+    </div>
+  </div>
+  <div id="levelInput">
+    <h3 id="levelInputText"></h3>
+    <div id="levelInputButts">
+      <button id="leftButt" class="selButt" onclick="changeValue('minus')" >((</button>
+      <div id="levelInputValue" onclick="subeNivel()" >value</div>
+      <button id="rightButt" class="selButt" onclick="changeValue('plus')" >))</button>
     </div>
   </div>
 </div>

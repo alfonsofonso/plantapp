@@ -22,21 +22,78 @@ const barra = document.getElementById("myBar");
 const botones = document.getElementById('botones');
 const startForm = document.getElementById('startForm')
 const game = document.getElementById('game')
-const  playButt = document.getElementById('playButt')
-const  userName = document.getElementById('user-name')
-const  myProgress = document.getElementById('myProgress')
-const  myBar=  document.getElementById('myBar'); 
+const playButt = document.getElementById('playButt')
+const userName = document.getElementById('user-name')
+const myProgress = document.getElementById('myProgress')
+const myBar=  document.getElementById('myBar');
+const levelUP = document.getElementById('levelUP');
+const levelInput = document.getElementById('levelInput');
+const levelInputText = document.getElementById('levelInputText')
+const leftButt = document.getElementById('leftButt')
+const rightButt = document.getElementById('rightButt')
+const levelInputValue = document.getElementById('levelInputValue')
+
+let userData = {
+  name : null,
+  altura : 0,
+  peso : 0,
+  edad: 0,
+  zodiaco: ''
+};
+
+let indexValue = 0;
+const changeValue = (operation) => {
+  if (operation === 'plus') {
+    indexValue++
+  } else {
+    indexValue--
+  };
+  levelInputValue.innerText = levels[nivel].values[indexValue];
+  if (indexValue === 0) {
+    leftButt.disabled = true;
+  } else {
+    leftButt.disabled = false;
+  }
+  if (indexValue === (levels[nivel].values.length - 1)) {
+    rightButt.disabled = true;
+  } else {
+    rightButt.disabled = false;
+  }
+}
+
+/* const selectUserValue = () => {
+  userData[levels[nivel].feature] = levels[nivel].values[indexValue];
+  indexValue = 0;
+  levelInput.style.display = 'none';
+  console.log(userData);
+  subeNivel()
+} */
+
+const showLevelInput = () => {
+  leftButt.disabled = true;
+  console.log('stocazzo', levelInputText)
+  levelInput.style.display = 'block';
+  let text = 'Congratulations, you can now upgrade your vibration with ' + levels[nivel].feature;
+  levelInputText.innerText = text;
+  levelInputValue.innerText = levels[nivel].values[indexValue];
+  levelUP.style.display = 'none';
+}
 
 var i = 0;
 const subeNivel = () => {
-  nivel++;
-  duracion = levels[nivel].duracion;
-  console.log('nivel:', nivel, duracion);
+  levelUP.disabled = true;
+  levelUP.innerText = levels[nivel].feature;
+  console.log('** nivel: ', nivel, 'speed: ', barSpeed);
+  barSpeed = levels[nivel].speed;
   i = 0;
   barra.style.width = '0%';
-
-  botones.removeChild(document.getElementById('aob'));
-  botones.style.display = 'none';
+  userData[levels[nivel].feature] = levels[nivel].values[indexValue];
+  indexValue = 0;
+  levelInput.style.display = 'none';
+  console.log(userData);
+  nivel++;
+  levelUP.innerText = levels[nivel].feature;
+  levelUP.style.display = 'block';
   barAnimation()
 }
 
@@ -52,15 +109,7 @@ function barAnimation() {
         clearInterval(id);
         i = 0;
         width = 1;
-        botones.style.display="block";
-        const boton = document.createElement('button');
-        boton.className= 'addOnButt';
-        boton.id = 'aob'
-        boton.onclick = subeNivel;
-        boton.innerText = levels[nivel].feature;
-        botones.appendChild(boton);
-
-        //elem.style.width = 0;
+        levelUP.disabled = false;
         return ;
       } else {
         width += barSpeed;
@@ -69,23 +118,20 @@ function barAnimation() {
     }
   }
 }
-
-  
-  function initHeal(event){
-    event.preventDefault()
-    const user = document.getElementById('user').value;
-    console.log("puto")
-    startForm.style.display= 'none';
-    game.style.display= 'block';
-    userName.innerText= user;
-    myProgress.style.display= 'block';
-    myBar.style.display= 'block'; 
-    barAnimation();
+function initHeal(event){
+  levelUP.disabled = true;
+  event.preventDefault()
+  startForm.style.display= 'none';
+  game.style.display= 'block';
+  nivel++;
+  levelUP.innerText = levels[nivel].feature;
+  const user = document.getElementById('user').value;
+  userName.innerText= user;
+  barAnimation();
 	if(context.state!="runing"){
 		context.resume();
 	}
 	creaArr();
-  nivel++;
 }
 
 function creaArr(){//n=num notas	
