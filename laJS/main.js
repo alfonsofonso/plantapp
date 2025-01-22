@@ -5,7 +5,7 @@ var notaBase=60;//
 var numeroDeOctavas=3;
 var nivel = 0;
 var nubes=[];
-var numNubes=1;
+var numNubes=5;
 var duracion = 60;
 var barSpeed=levels[0].speed;
 var maxDuracion=1251;
@@ -85,6 +85,7 @@ const subeNivel = () => {
   levelUP.innerText = levels[nivel].feature;
   console.log('** nivel: ', nivel, 'speed: ', barSpeed);
   barSpeed = levels[nivel].speed;
+  console.log("speed ahora:",barSpeed)
   i = 0;
   barra.style.width = '0%';
   userData[levels[nivel].feature] = levels[nivel].values[indexValue];

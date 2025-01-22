@@ -1,6 +1,6 @@
 :root {
   --accent: #b8fe1eff;
-  --dark: rgb(79, 79, 3);
+  --dark: rgb(54, 54, 54);
   --white: rgb(240, 244, 237);
   --black: rgb(3, 3, 1);
   --red: #a71d31ff;
@@ -102,8 +102,8 @@ input[type="text"]{
   box-sizing: border-box;
   overflow: hidden;
   width: 80%;
-  height: 3vh;
-  background-color: #ddd;
+  height: 1vh;
+  background-color: #888;
   border-radius: 42%;
   z-index: 22;
 }
