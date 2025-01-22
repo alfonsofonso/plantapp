@@ -34,7 +34,6 @@ const levels = [
     feature : 'altura',
     values : range(60, 220),
     inputType : 'range',
-
     armonic : []
   },
   {

@@ -3,30 +3,29 @@ var arbol= {
         nombre:"Jose",
         altura:170,
         peso:60,
-        edad
+        edad:18
     },
     entorno: {
-        localizacion,
-        temperatura,
-        presion,
+        localizacion:[0,0],
+        temperatura:20,
+        presion:1000,
         viajes: [
-            "cairo",
+            "Giza",
             "tenoctiklan",
             "stonehenge",
             "ibiza"
         ],
     },
     objetivos:{
-        relax,
-        dormir,
-        concentracion,
-
+        relax:true,
+        dormir:false,
+        concentracion:false,
+        atraccion:false
     },
     teorias:{
-        solfeggio,
-        shumman,
-        chacras,
-        etc
+        solfeggio:false,
+        shumman:false,
+        chacras:false
     },
 
 
@@ -35,15 +34,10 @@ var arbol= {
 var factores={
     notaBase:"altura",
     numNotas:"nivel",
-    escala:"objetivos",
+    escalviajesa:"objetivos",
     volumen:"volumen + velocidad",
     tesitura:"nivel",
     silencios:"hora",
 
     volRuido:"limpieza"
-}
-
-function sonificaNombre(sustan){
-    sustantivo = sustan || "Jose";
-    
 }

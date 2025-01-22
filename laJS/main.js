@@ -167,6 +167,22 @@ resetea=function(){
 	}
 }
 
+function sonificaNombre(sustan){
+  sustantivo = sustan || "Jose";
+  suma = getCharCodes(sustantivo).reduce((valorAnterior, valorActual) => {
+      return valorAnterior + valorActual;
+    }, 0);
+    console.log(suma);
+    return suma
+}
+function getCharCodes(s) {
+  let charCodeArr = [];
+  for (let i = 0; i < s.length; i++) {
+      let code = s.charCodeAt(i);
+      charCodeArr.push(code);
+  }
+  return charCodeArr;
+}
 
 //////////////////////////////////////////     start    //////////////////////////////
 
