@@ -46,7 +46,7 @@ const levels = [
   },
   {
     id: 2,
-    speed: 2,
+    speed: 9,
     feature : 'edad',
     values : range(18, 120),
     inputType : 'range',
@@ -55,8 +55,8 @@ const levels = [
     id: .2,
     speed: 80,
     feature : 'zodiaco',
-    values : [],
-    inputType : [ 'Aries', 'Tauro', 'Géminis', 'Cáncer', 'Leo', 'Virgo', 'Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis'],
+    /* values : [], */
+    values : [ 'Aries', 'Tauro', 'Géminis', 'Cáncer', 'Leo', 'Virgo', 'Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis'],
     armonic : []
   }
 ]

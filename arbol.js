@@ -25,7 +25,8 @@ var arbol= {
     teorias:{
         solfeggio:false,
         shumman:false,
-        chacras:false
+        chacras:false,
+        sheppard:false
     },
 
 

@@ -6,7 +6,7 @@ var numeroDeOctavas=3;
 var nivel = 0;
 var nubes=[];
 var numNubes=5;
-var duracion = 60;
+var duracion = 60;// sonificaNombre
 var barSpeed=levels[0].speed;
 var maxDuracion=1251;
 var escalas=['ionian','melodicminor','wholetone','diminished','blues','pentatonicmajor',
@@ -32,16 +32,19 @@ const levelInputText = document.getElementById('levelInputText')
 const leftButt = document.getElementById('leftButt')
 const rightButt = document.getElementById('rightButt')
 const levelInputValue = document.getElementById('levelInputValue')
+const userDataDiv = document.getElementById("userdata")
+const btnSubeXP = document.getElementById("puntua")
+let xp = 0;
 
 let userData = {
   name : null,
-  altura : 0,
-  peso : 0,
-  edad: 0,
-  zodiaco: ''
+  altura : null,
+  peso : null,
+  edad: null,
+  zodiaco: null
 };
 
-let indexValue = 0;
+let indexValue = 0;// valor 
 const changeValue = (operation) => {
   if (operation === 'plus') {
     indexValue++
@@ -88,14 +91,15 @@ const subeNivel = () => {
   console.log("speed ahora:",barSpeed)
   i = 0;
   barra.style.width = '0%';
-  userData[levels[nivel].feature] = levels[nivel].values[indexValue];
-  indexValue = 0;
+  userData[levels[nivel].feature] = levels[nivel].values[indexValue];// popula objeto usuario
   levelInput.style.display = 'none';
   console.log(userData);
+  addVariable(levels[nivel].values[indexValue])
+  indexValue = 0;
   nivel++;
   levelUP.innerText = levels[nivel].feature;
-  levelUP.style.display = 'block';
-  barAnimation()
+/*   botones.style.display = 'block';
+ */  barAnimation()
 }
 
 //////////////////////////////////////////     functions   //////////////////////////////
@@ -111,6 +115,7 @@ function barAnimation() {
         i = 0;
         width = 1;
         levelUP.disabled = false;
+        btnSubeXP.disabled = false;
         return ;
       } else {
         width += barSpeed;
@@ -120,14 +125,18 @@ function barAnimation() {
   }
 }
 function initHeal(event){
+  btnSubeXP.disabled = true;
   levelUP.disabled = true;
-  event.preventDefault()
+  const user = document.getElementById('user').value;
+  userData.name = user
+  event.preventDefault(user)
   startForm.style.display= 'none';
   game.style.display= 'block';
+  addVariable(user)
   nivel++;
   levelUP.innerText = levels[nivel].feature;
-  const user = document.getElementById('user').value;
-  userName.innerText= user;
+  duracion = sonificaNombre(user)
+  //subeNivel()
   barAnimation();
 	if(context.state!="runing"){
 		context.resume();
@@ -173,7 +182,7 @@ function sonificaNombre(sustan){
   suma = getCharCodes(sustantivo).reduce((valorAnterior, valorActual) => {
       return valorAnterior + valorActual;
     }, 0);
-    console.log(suma);
+    console.log("sonifico",suma);
     return suma
 }
 function getCharCodes(s) {
@@ -193,4 +202,21 @@ function empieza(){
 	clock.tempo=100;
 }
 
+function addVariable(valor){
+  console.log("valor en add variable" , valor)
+  //valor= valor||"60"
+  let newLevel = levels[nivel];
+  console.log(newLevel)
+  let d= document.createElement("div");
+  d.className = "userInfo";
+  d.innerText = newLevel.feature + ": "+ valor;
+  userDataDiv.appendChild(d);
+}
 
+const addPoints = () => {
+  xp++
+  console.log(xp, "xp")
+  btnSubeXP.disabled = true;
+  levelUP.disabled = true;
+  barAnimation()
+}
