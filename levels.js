@@ -21,12 +21,23 @@ function range(start = 0, end, step = 1) {
   return result;
 }
 
+const soundMinMax = {
+  duration: {
+    min: 0,
+    max: 100
+  }
+}
+
 const levels = [
   {
     id: 0,
     speed: 20,
     feature : 'name',
-    armonic : []
+    armonic : [],
+    sound: 'duracion',
+    min: 10,
+    max: 66,
+    mode: 'string'
   },
   {
     id: 1,
@@ -35,6 +46,10 @@ const levels = [
     values : range(60, 220),
     inputType : 'range',
     armonic : [],
+    sound: 'duracion',
+    min: 10,
+    max: 66,
+    mode: 'number'
   },
   {
     id: 2,
@@ -42,7 +57,11 @@ const levels = [
     feature : 'peso',
     values : range(40, 300),
     inputType : 'range',
-    armonic : []
+    armonic : [],
+    sound: 'duracion',
+    min: 10,
+    max: 66,
+    mode: 'number'
   },
   {
     id: 2,
@@ -50,13 +69,21 @@ const levels = [
     feature : 'edad',
     values : range(18, 120),
     inputType : 'range',
-    armonic : []
-  },{
+    armonic : [],
+    sound: 'duracion',
+    min: 10,
+    max: 66,
+    mode: 'number'
+  }/* {
     id: .2,
     speed: 80,
     feature : 'zodiaco',
-    /* values : [], */
+    /* values : [], 
     values : [ 'Aries', 'Tauro', 'Géminis', 'Cáncer', 'Leo', 'Virgo', 'Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis'],
-    armonic : []
-  }
+    armonic : [],
+    sound: 'duracion',
+    min: 10,
+    max: 66,
+    mode: 'string',
+  } */
 ]

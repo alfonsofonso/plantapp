@@ -20,8 +20,11 @@ const str2n1000 = (str) => {
 
 const str2MinMax = (str, min, max) => {
   let num = str2n1000(str);
-  return mapNumRange(num, 0, 999, min, max);
+  const result = mapNumRange(num, 0, 999, min, max);
+  console.log(result);
+  return result;
 };
 
 /* console.log(str2n1000(text))
 console.log(str2MinMax(text, min, max)) */
+
