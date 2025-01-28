@@ -199,7 +199,7 @@ function getCharCodes(s) {
 function empieza(){
 	console.log("empiezo")
 	context.resume();
-	clock.tempo=100;
+	clock.tempo=120;//el tempo en lissajousJS
 }
 
 function addVariable(valor){

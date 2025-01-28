@@ -28,17 +28,21 @@ var arbol= {
         chacras:false,
         sheppard:false
     },
-
-
 }
 
-var factores={
-    notaBase:"altura",
-    numNotas:"nivel",
-    escalviajesa:"objetivos",
-    volumen:"volumen + velocidad",
-    tesitura:"nivel",
-    silencios:"hora",
 
-    volRuido:"limpieza"
+so={//aun no implementado
+    mainVol:.8,//0-1
+    notaBase:52,//10-72
+    numeroDeOctavas:4,//1-8... relacionado con notabase
+    duracion:100,// 1-1000
+    escalas:['ionian','melodicminor','wholetone','diminished','blues','pentatonicmajor',
+        'pentatonicminor','flamenco','altered','bebopdominant','bebopdominantflatnine',
+        'bebopmajor','bebopminor','major','major7','major6','dominant','dominantflat5',"augmented",
+        'minor','minor7','minor6','dim','minorflat5','sus4','sus2','fouths','fifth','tritone',
+        'hexatonic','chromatic',"octaves"],
+    aroma:escalas[5],//escala actual
+    nombresNotas:["C", "Db", "D", "Eb", "E","F", "Gb", "G", "Ab", "A", "Bb", "B" ],
+    silencios:100//por determinar
+
 }
