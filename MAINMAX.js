@@ -184,7 +184,7 @@ const upgradeLevel = () => {
   levelUP.innerText = levels[nivel + 2].feature;
 
   if (newLevel.mode === 'string') {
-    s[newLevel.sound] = str2MinMax(value, newLevel.min, newLevel.max);
+    so[newLevel.sound] = str2MinMax(value, newLevel.min, newLevel.max);
   }
   else if (newLevel.mode === 'number') {
     console.log(
@@ -194,7 +194,7 @@ const upgradeLevel = () => {
       newLevel.min, 
       newLevel.max
     )
-    s[newLevel.sound] = mapNumRange(
+    so[newLevel.sound] = mapNumRange(
       value, 
       newLevel.values[0], 
       newLevel.values[newLevel.values.length - 1],
@@ -206,12 +206,12 @@ const upgradeLevel = () => {
 
   userData[newLevel.feature] = value;
   barSpeed = newLevel.speed;
-  console.log(s)
+  console.log(so)
   i = 0;
   /* barra.style.width = '0%'; */
   barAnimation()
   nivel++;
   addVariable(value);
 
-  /* updatesound(s); AQUI LE DAS DE COMER EL s  */ 
+  /* updatesound(s); AQUI LE DAS DE COMER EL so  */ 
 }

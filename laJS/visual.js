@@ -57,7 +57,6 @@ onload=function(){
   info()// un console log
 
 }
-ontouchend = (event) => {empieza() };
 
 /////     HELPERS
 function tick(event) {
