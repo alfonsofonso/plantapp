@@ -33,6 +33,7 @@ const levels = [
     id: 0,
     speed: 20,
     feature : 'name',
+    values:range(30, 90),
     armonic : [],
     sound: 'duracion',
     min: 10,
@@ -44,7 +45,6 @@ const levels = [
     speed: 11,
     feature : 'altura',
     values : range(60, 220),
-    inputType : 'range',
     armonic : [],
     sound: 'duracion',
     min: 10,
@@ -70,7 +70,6 @@ const levels = [
     values : range(18, 120),
     inputType : 'range',
     armonic : [],
-    sound: 'duracion',
     min: 10,
     max: 66,
     mode: 'number'
@@ -84,6 +83,6 @@ const levels = [
     sound: 'duracion',
     min: 10,
     max: 66,
-    mode: 'string',
+    mode: 'select',
   } */
 ]

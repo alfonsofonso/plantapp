@@ -51,8 +51,10 @@ function info(){
 
 onload=function(){
 	initVisual();
-  empieza();
-  info()
+  context.resume();
+	clock.tempo=120;//el tempo en lissajousJS
+  barAnimation();
+  info()// un console log
 
 }
 ontouchend = (event) => {empieza() };

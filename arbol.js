@@ -31,18 +31,12 @@ var arbol= {
 }
 
 
-so={//aun no implementado
+let so={//aun no implementado
     mainVol:.8,//0-1
-    notaBase:52,//10-72
+    notaBase:40,//10-72
+    numNubes:4,
     numeroDeOctavas:4,//1-8... relacionado con notabase
     duracion:100,// 1-1000
-    escalas:['ionian','melodicminor','wholetone','diminished','blues','pentatonicmajor',
-        'pentatonicminor','flamenco','altered','bebopdominant','bebopdominantflatnine',
-        'bebopmajor','bebopminor','major','major7','major6','dominant','dominantflat5',"augmented",
-        'minor','minor7','minor6','dim','minorflat5','sus4','sus2','fouths','fifth','tritone',
-        'hexatonic','chromatic',"octaves"],
-    aroma:"major",//escala actual
-    nombresNotas:["C", "Db", "D", "Eb", "E","F", "Gb", "G", "Ab", "A", "Bb", "B" ],
-    silencios:100//por determinar
-
+    silencios:100,//por determinar
+    aroma:"major"
 }

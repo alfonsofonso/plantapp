@@ -1,22 +1,20 @@
-//// main.js
+
 //////////////////////////////////////////     globales   //////////////////////////////
-var mainVol=0.8;
-var notaBase=60;//
-var numeroDeOctavas=3;
+
 var nivel = -1;
+
 var nubes=[];
 var numNubes=5;
-var duracion = 60;// sonificaNombre
-var barSpeed=levels[0].speed;
-var maxDuracion=1251;
+var grupo;
+var barSpeed=100
+
 var escalas=['ionian','melodicminor','wholetone','diminished','blues','pentatonicmajor',
  'pentatonicminor','flamenco','altered','bebopdominant','bebopdominantflatnine',
  'bebopmajor','bebopminor','major','major7','major6','dominant','dominantflat5',"augmented",
  'minor','minor7','minor6','dim','minorflat5','sus4','sus2','fouths','fifth','tritone',
  'hexatonic','chromatic',"octaves"];
-var aroma="sus4";
-var grupo;
 var nombresNotas=["C", "Db", "D", "Eb", "E","F", "Gb", "G", "Ab", "A", "Bb", "B" ];
+
 //////////////////////////////////////////     instrumentos   //////////////////////////////
 const barra = document.getElementById("myBar");
 const botones = document.getElementById('botones');
@@ -33,7 +31,7 @@ const leftButt = document.getElementById('leftButt')
 const rightButt = document.getElementById('rightButt')
 const levelInputValue = document.getElementById('levelInputValue')
 const userDataDiv = document.getElementById("userdata")
-const btnSubeXP = document.getElementById("puntua")
+
 let xp = 0;
 
 let userData = {
@@ -90,6 +88,7 @@ var i = 0;
 
 //////////////////////////////////////////     functions   //////////////////////////////
 function barAnimation() {
+  console.log('baranimation')
   if (i == 0) {
     i = 1;
     var width = 1;
@@ -97,13 +96,17 @@ function barAnimation() {
     function frame() {
       //console.log(width)
       if (width >= 1000) {
+        if (nivel==-1) {
+          playButt.style.display="block"
+          nivel=0
+        }
         clearInterval(id);
         i = 0;
         width = 1;
         if (levels.length > nivel-1) {
           levelUP.disabled = false;
         }
-        btnSubeXP.disabled = false;
+
         return ;
       } else {
         width += barSpeed;
@@ -112,30 +115,31 @@ function barAnimation() {
     }
   }
 }
+
 function initHeal(event){
-  const user = document.getElementById('user').value;
-  event.preventDefault(user)
-  startForm.style.display= 'none';
+
   game.style.display= 'block';
-  upgradeLevel(user);
+  playButt.style.display="none"
 	if(context.state!="runing"){
 		context.resume();
 	}
-	creaArr();
+
+  barAnimation()
+	creaArr();// iniciar sonido
 }
 
 function creaArr(){//n=num notas	
 	grupo=new group();
-	for(var i=0;i<numNubes;i++){
+	for(var i=0;i<so.numNubes;i++){
 		nubes[i]=new track(); ///lissajousJS
-		var d=eval("walk."+yuxtapon(aroma)+"("+notaBase+","+numeroDeOctavas+")");
-		nubes[i].beat(duracion).notes(d).nl(duracion)
-			.adsr(duracion/4,duracion/3,.6,duracion/2).vol(mainVol*0.25/nubes.length)
+		var d=eval("walk."+yuxtapon(so.aroma)+"("+so.notaBase+","+so.numeroDeOctavas+")");
+		nubes[i].beat(so.duracion).notes(d).nl(so.duracion)
+			.adsr(so.duracion/4,so.duracion/3,.6,so.duracion/2).vol(so.mainVol*0.25/nubes.length)
 			.trans(Math.random()/10);
 		grupo.add(nubes[i]);
 	};
-	console.log("nubes: "+numNubes+" dur: "+duracion+" aroma: "+aroma)
-	return [numNubes,aroma,duracion]
+	console.log("nubes: "+so.numNubes+" dur: "+so.duracion+" aroma: "+so.aroma)
+  //return [so]
 
 }
 yuxtapon=function(q){///???
@@ -154,6 +158,7 @@ function destruyeArr(){// vacia nubes
 
 //////////////////////////////////////////     start    //////////////////////////////
 
+
 function addVariable(valor){
   let newLevel = levels[nivel];
   let d= document.createElement("div");
@@ -162,39 +167,22 @@ function addVariable(valor){
   userDataDiv.appendChild(d);
 }
 
-const addPoints = () => {
-  xp++
-  console.log(xp, "xp")
-  btnSubeXP.disabled = true;
-  levelUP.disabled = true;
-  levelInput.style.display = 'none';
-  levelUP.style.display = 'block';
-  barAnimation()
-}
 
-let s = {
-   mainVol: 0.8,
- notaBase: 60,//
- numeroDeOctavas: 3,
- nubes: [],
- numNubes: 5,
- duracion :  60,// sonificaNombre
-/*  barSpeed: levels[0].speed,
- */ 
-  maxDuracion: 1251,
- aroma: "sus4",
-}
 
 const upgradeLevel = () => {
   //const actualLevel = levels[nivel];
-  btnSubeXP.disabled = true;
+
   levelUP.disabled = true;
   levelInput.style.display = 'none';
   levelUP.style.display = 'block';
   const newLevel = levels[nivel + 1];
+
   let value = newLevel.values[indexValue];
-  console.log(value)
+  
+  console.log(value,"mi value")
+ 
   levelUP.innerText = levels[nivel + 2].feature;
+
   if (newLevel.mode === 'string') {
     s[newLevel.sound] = str2MinMax(value, newLevel.min, newLevel.max);
   }
@@ -215,6 +203,7 @@ const upgradeLevel = () => {
     )
     indexValue = newLevel.values.length / 2
   }
+
   userData[newLevel.feature] = value;
   barSpeed = newLevel.speed;
   console.log(s)

@@ -27,7 +27,7 @@ function ponEstrella(a,v,s){// es un circulo-planta-cuadrado-nave
   equis=(radius/(2 + Math.random()*20) )* Math.cos(ang) + amp/2;
   igriega=(radius/(2 + Math.random()*20) ) * Math.abs(Math.sin(ang))+alt/2;
 
-  vel=duracion*256//// atenncios
+  vel=so.duracion*256//// atenncios
   //vel=velSpacial;/// nope
 
   let radioVel=radioCircle///////////////
