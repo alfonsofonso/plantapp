@@ -41,7 +41,7 @@ so={//aun no implementado
         'bebopmajor','bebopminor','major','major7','major6','dominant','dominantflat5',"augmented",
         'minor','minor7','minor6','dim','minorflat5','sus4','sus2','fouths','fifth','tritone',
         'hexatonic','chromatic',"octaves"],
-    aroma:escalas[5],//escala actual
+    aroma:"major",//escala actual
     nombresNotas:["C", "Db", "D", "Eb", "E","F", "Gb", "G", "Ab", "A", "Bb", "B" ],
     silencios:100//por determinar
 

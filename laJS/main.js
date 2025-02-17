@@ -82,14 +82,14 @@ const showLevelInput = () => {
   levelUP.style.display = 'none';
 }
 
-var i = 0;
+var iLevel = 0;
 const subeNivel = () => {
   levelUP.disabled = true;
   levelUP.innerText = levels[nivel].feature;
   console.log('** nivel: ', nivel, 'speed: ', barSpeed);
   barSpeed = levels[nivel].speed;
   console.log("speed ahora:",barSpeed)
-  i = 0;
+  iLevel = 0;
   barra.style.width = '0%';
   userData[levels[nivel].feature] = levels[nivel].values[indexValue];// popula objeto usuario
   levelInput.style.display = 'none';
@@ -104,15 +104,15 @@ const subeNivel = () => {
 
 //////////////////////////////////////////     functions   //////////////////////////////
 function barAnimation() {
-  if (i == 0) {
-    i = 1;
+  if (iLevel == 0) {
+    iLevel = 1;
     var width = 1;
     var id = setInterval(frame, 100);
     function frame() {
       //console.log(width)
       if (width >= 1000) {
         clearInterval(id);
-        i = 0;
+        iLevel = 0;
         width = 1;
         levelUP.disabled = false;
         btnSubeXP.disabled = false;
@@ -158,7 +158,7 @@ function creaArr(){//n=num notas
 	return [numNubes,aroma,duracion]
 
 }
-yuxtapon=function(q){///???
+yuxtapon=function(q){///regEx
  return q=q.replace(/\s/g, '');
 
 }
