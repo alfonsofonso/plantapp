@@ -16,77 +16,13 @@ var escalas=['ionian','melodicminor','wholetone','diminished','blues','pentatoni
 var nombresNotas=["C", "Db", "D", "Eb", "E","F", "Gb", "G", "Ab", "A", "Bb", "B" ];
 
 //////////////////////////////////////////     instrumentos   //////////////////////////////
-const barra = document.getElementById("myBar");
-const botones = document.getElementById('botones');
-const startForm = document.getElementById('startForm')
-const game = document.getElementById('game')
+const myBar = document.getElementById("myBar");
 const playButt = document.getElementById('playButt')
-const userName = document.getElementById('user-name')
 const myProgress = document.getElementById('myProgress')
-const myBar=  document.getElementById('myBar');
-const levelUP = document.getElementById('levelUP');
-const levelInput = document.getElementById('levelInput');
-const levelInputText = document.getElementById('levelInputText')
-const leftButt = document.getElementById('leftButt')
-const rightButt = document.getElementById('rightButt')
-const levelInputValue = document.getElementById('levelInputValue')
-const userDataDiv = document.getElementById("userdata")
-
-let xp = 0;
-
-let userData = {
-  name : null,
-  altura : null,
-  peso : null,
-  edad: null,
-  zodiaco: null
-};
-
-let indexValue = 0;// valor 
-const changeValue = (operation) => {
-  if (operation === 'plus') {
-    indexValue++
-  } else {
-    indexValue--
-  };
-  levelInputValue.innerText = levels[nivel + 1].values[indexValue];
-  if (indexValue === 0) {
-    leftButt.disabled = true;
-  } else {
-    leftButt.disabled = false;
-  }
-  if (indexValue === (levels[nivel + 1].values.length - 1)) {
-    rightButt.disabled = true;
-  } else {
-    rightButt.disabled = false;
-  }
-}
-
-/* const selectUserValue = () => {
-  userData[levels[nivel].feature] = levels[nivel].values[indexValue];
-  indexValue = 0;
-  levelInput.style.display = 'none';
-  console.log(userData);
-  subeNivel()
-} */
-
-const showLevelInput = () => {
-  /* if (condition) {
-    
-  } */
-  leftButt.disabled = true;
-  console.log('stocazzo', levelInputText)
-  levelInput.style.display = 'block';
-  let text = 'Congratulations, you can now upgrade your vibration with ' + levels[nivel +1].feature;
-  levelInputText.innerText = text;
-  levelInputValue.innerText = levels[nivel + 1].values[indexValue];
-  levelUP.style.display = 'none';
-}
-
-var i = 0;
-
+const userData = document.getElementById("userdata")
 
 //////////////////////////////////////////     functions   //////////////////////////////
+let i = 0;
 function barAnimation() {
   console.log('baranimation')
   if (i == 0) {
@@ -110,20 +46,17 @@ function barAnimation() {
         return ;
       } else {
         width += barSpeed;
-        barra.style.width = width/10 + "%";
+        myBar.style.width = width/10 + "%";
       }
     }
   }
 }
 
-function initHeal(event){
-
-  game.style.display= 'block';
+function initHeal(){
   playButt.style.display="none"
 	if(context.state!="runing"){
 		context.resume();
 	}
-
   barAnimation()
 	creaArr();// iniciar sonido
 }
@@ -164,15 +97,13 @@ function addVariable(valor){
   let d= document.createElement("div");
   d.className = "userInfo";
   d.innerText = newLevel.feature + ": "+ valor;
-  userDataDiv.appendChild(d);
+  userData.appendChild(d);
 }
-
-
 
 const upgradeLevel = () => {
   //const actualLevel = levels[nivel];
 
-  levelUP.disabled = true;
+  /* levelUP.disabled = true;
   levelInput.style.display = 'none';
   levelUP.style.display = 'block';
   const newLevel = levels[nivel + 1];
@@ -204,11 +135,11 @@ const upgradeLevel = () => {
     indexValue = newLevel.values.length / 2
   }
 
-  userData[newLevel.feature] = value;
+  userData[newLevel.feature] = value; */
   barSpeed = newLevel.speed;
   console.log(so)
   i = 0;
-  /* barra.style.width = '0%'; */
+  /* myBar.style.width = '0%'; */
   barAnimation()
   nivel++;
   addVariable(value);

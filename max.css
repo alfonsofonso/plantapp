@@ -10,28 +10,7 @@
 body {
   background: var(--gradient-top);
 }
-#startForm {
-  z-index: 13;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5vh;
-  align-content: center;
-  justify-items: center;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
 
-}
-#user {
-  width: 60%;
-  margin: auto;
-  border-radius: 8%;
-  background-color: var(--dark);
-  border-color: var(--accent);
-}
 ::placeholder {
   color: var(--white);
   opacity: 1; /* Firefox */
@@ -58,6 +37,11 @@ input[type="text"]{
   border: 3px solid var(--dark);
   aspect-ratio: 1;
   display: none;
+  position:absolute;
+  bottom: 0vh;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 #logo {
   margin: 0;
@@ -65,19 +49,6 @@ input[type="text"]{
 }
 @keyframes mymove {
   50% {opacity: 0;}
-}
-.label {
-  color: white;
-}
-#user-name {
-  color: white;
-}
-
-#game{
-  display: none;
-  position: relative;
-  width: 100%;
-  height: 100vh;
 }
 
 .screen {
@@ -89,13 +60,13 @@ input[type="text"]{
   position: relative;
 }
 
-#startPoint{
+/* #startPoint{
   position: absolute;
   left:20%;
   top:2%;
   right: 20%;
   font-size: 2em;
-}
+} */
 #myProgress {
   position: absolute;
   left:10%;
@@ -116,41 +87,29 @@ input[type="text"]{
   position: absolute;
 }
 
-.addOnButt {
-  color: #a0ff10;
-  
-}
-#botones{
-  position:absolute;
-  bottom: 6vh;
+.centered {
+  position: absolute;
   left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  top: 20%;
+  transform: translate(-50%, -0%);
+  padding: 2vw;
+  color: var(--accent);
+  font-size: large;
+  text-align: center;
 }
-.levelUP {
-  background-color: grey;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  margin:auto;
-  cursor: not-allowed; /* Indicates the button is disabled */
+.glow {
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 5s ease-in-out infinite alternate;
+  -moz-animation: glow 5s ease-in-out infinite alternate;
+  animation: glow 5s ease-in-out infinite alternate;
 }
 
-.levelUP:enabled {
-  background-color: green;
-  cursor: pointer;
-}
-#levelInput {
-  position: absolute;
-  left:15%;
-  background-color: var(--white);
-  width: 70%;
-  bottom: 20vh;
-  display:none;
-  z-index: 1312;
-}
-#levelInputButts {
-  display:flex;
-  justify-content: space-between;
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--dark), 0 0 40px var(--dark), 0 0 50px var(--dark), 0 0 60px var(--dark), 0 0 70px var(--dark);
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px var(--accent), 0 0 40px var(--accent), 0 0 50px var(--accent), 0 0 60px var(--accent), 0 0 70px var(--accent), 0 0 80px var(--accent);
+  }
 }

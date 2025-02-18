@@ -30,10 +30,103 @@ const soundMinMax = {
 
 const levels = [
   {
-    id: 0,
+    feature: 'currentMonth',
+    mode: 'time',             //special
+    speed: 20,
+    min: null,             
+    max: null,             
+    values: [],           //only in array mode
+    soundMod: 'numeroDeOctavas',
+    cb: function() {
+      const currentDate = new Date();
+      const month = currentDate.getMonth();
+      return mapNumRange(
+        month, 
+        0, 
+        23,
+        5, 
+        85
+      ) 
+    }
+  },
+  {
+    feature: 'name',
+    mode: 'string',
+    speed: 20,
+    min: 1,              //in string mode indicates min chars
+    max: 15,             //only in string mode indicates min chars
+    values: [],           //only in array mode
+    soundMod: 'notabase', //el factor de objeco s que va a modificar
+    cb: function() {
+      return str2MinMax(
+        value,
+        55,               //el min valor que puede soundMod
+        100               //el min valor que puede soundMod
+      )
+    }
+  },
+  {
+    feature: 'height',
+    mode: 'number',
+    speed: 20,
+    min: 65,              
+    max: 210,             
+    values: [],           //only in array mode
+    soundMod: 'duration',
+    cb: function() {
+      return mapNumRange(
+        value, 
+        this.min, 
+        this.max,
+        5, 
+        1312
+      )
+    }
+  },
+  {
+    feature: 'zodiac',
+    mode: 'array',
+    speed: 20,
+    min: null,             
+    max: null,             
+    values: ['Aries', 'Tauro', 'Géminis', 'Cáncer', 'Leo', 'Virgo', 'Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis'],           //only in array mode
+    soundMod: 'duration',
+    cb: function() {
+      return mapNumRange(
+        value, 
+        this.min, 
+        this.max,
+        5, 
+        1312
+      )
+    }
+  },  
+  {
+    feature: 'currentHour',
+    mode: 'time',             //special
+    speed: 20,
+    min: null,             
+    max: null,             
+    values: [],           //only in array mode
+    soundMod: 'numeroDeOctavas',
+    cb: function() {
+      const currentDate = new Date();
+      const hours = currentDate.getHours();
+      return mapNumRange(
+        hours, 
+        0, 
+        23,
+        5, 
+        85
+      ) 
+    }
+  },
+];  
+
+  /* {
     speed: 20,
     feature : 'name',
-    values:range(30, 90),
+    values: ['Luigi'],
     armonic : [],
     sound: 'duracion',
     min: 10,
@@ -45,6 +138,7 @@ const levels = [
     speed: 11,
     feature : 'altura',
     values : range(60, 220),
+    inputType : 'range',
     armonic : [],
     sound: 'duracion',
     min: 10,
@@ -70,10 +164,11 @@ const levels = [
     values : range(18, 120),
     inputType : 'range',
     armonic : [],
+    sound: 'duracion',
     min: 10,
     max: 66,
-    mode: 'number'
-  }/* {
+    mode: 'number' 
+  } {
     id: .2,
     speed: 80,
     feature : 'zodiaco',
@@ -83,6 +178,5 @@ const levels = [
     sound: 'duracion',
     min: 10,
     max: 66,
-    mode: 'select',
+    mode: 'string',
   } */
-]
