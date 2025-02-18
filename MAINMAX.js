@@ -20,6 +20,7 @@ const myBar = document.getElementById("myBar");
 const playButt = document.getElementById('playButt')
 const myProgress = document.getElementById('myProgress')
 const userData = document.getElementById("userdata")
+const text = document.getElementById("text")
 
 //////////////////////////////////////////     functions   //////////////////////////////
 let i = 0;
@@ -40,7 +41,7 @@ function barAnimation() {
         i = 0;
         width = 1;
         if (levels.length > nivel-1) {
-          levelUP.disabled = false;
+          playButt.disabled = false;
         }
 
         return ;
@@ -51,9 +52,13 @@ function barAnimation() {
     }
   }
 }
+/* playButt.addEventListener('click', )
+ */function initHeal(){
+  console.log('initheal')
+  playButt.disabled = true;
+  playButt.onclick = levelAlert;
+  text.style.display = 'none';
 
-function initHeal(){
-  playButt.style.display="none"
 	if(context.state!="runing"){
 		context.resume();
 	}
@@ -99,7 +104,20 @@ function addVariable(valor){
   d.innerText = newLevel.feature + ": "+ valor;
   userData.appendChild(d);
 }
-
+const levelAlert = () => {
+  console.log('alert from level ', nivel);
+  text.innerText = levels[nivel].text;
+  text.style.display = 'block';
+  playButt.onclick = levelUP;
+}
+const levelUP = () => {
+  nivel++;
+  console.log('levelUP to ', nivel)
+  barAnimation();
+  text.style.display = 'none';
+  playButt.disabled = true;
+  playButt.onclick = levelAlert;
+}
 const upgradeLevel = () => {
   //const actualLevel = levels[nivel];
 

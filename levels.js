@@ -27,8 +27,29 @@ const soundMinMax = {
     max: 100
   }
 }
-
 const levels = [
+  {
+  text: 'level 0 : fjyhkjhjhsadhfkjhsjkshasfhjkahfkja',
+  /* inputInnerHTML: '<input type="text" */ 
+  },
+  {
+  text: 'level 1 : fjyhkjhjhsadhfkjhsjkshasfhjkahfkja',
+  /* inputInnerHTML: '<input type="text" */ 
+  },
+  {
+  text: 'level 2 : fjyhkjhjhsadhfkjhsjkshasfhjkahfkja',
+  /* inputInnerHTML: '<input type="text" */ 
+  },
+  {
+  text: 'level 3 : fjyhkjhjhsadhfkjhsjkshasfhjkahfkja',
+  /* inputInnerHTML: '<input type="text" */ 
+  },
+  {
+  text: 'level 4 : fjyhkjhjhsadhfkjhsjkshasfhjkahfkja',
+  /* inputInnerHTML: '<input type="text" */ 
+  },
+]
+/* const levels = [
   {
     feature: 'currentMonth',
     mode: 'time',             //special
@@ -121,7 +142,7 @@ const levels = [
       ) 
     }
   },
-];  
+];   */
 
   /* {
     speed: 20,

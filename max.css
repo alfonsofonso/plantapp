@@ -42,6 +42,11 @@ input[type="text"]{
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  animation:  fadeIn 3s ease-in;
+}
+#playButt:disabled {
+  opacity: 0.3;
+  animation: none;
 }
 #logo {
   margin: 0;
@@ -78,6 +83,7 @@ input[type="text"]{
   background-color: #888;
   border-radius: 42%;
   z-index: 22;
+  animation: fadeIn 3s ease-in;
 }
 #myBar {
   width: 10%;
@@ -96,13 +102,15 @@ input[type="text"]{
   color: var(--accent);
   font-size: large;
   text-align: center;
+  z-index: 1312;
 }
 .glow {
   color: #fff;
   text-align: center;
   -webkit-animation: glow 5s ease-in-out infinite alternate;
   -moz-animation: glow 5s ease-in-out infinite alternate;
-  animation: glow 5s ease-in-out infinite alternate;
+  animation:  glow 5s ease-in-out infinite alternate,
+              fadeIn 3s ease-in;
 }
 
 @keyframes glow {
@@ -111,5 +119,13 @@ input[type="text"]{
   }
   to {
     text-shadow: 0 0 20px #fff, 0 0 30px var(--accent), 0 0 40px var(--accent), 0 0 50px var(--accent), 0 0 60px var(--accent), 0 0 70px var(--accent), 0 0 80px var(--accent);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;  
   }
 }
