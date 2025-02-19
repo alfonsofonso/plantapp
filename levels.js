@@ -1,216 +1,168 @@
-function range(start = 0, end, step = 1) {
-  // Handle case where only one argument is passed (end is the argument)
-  if (end === undefined) {
-    end = start;
-    start = 0;
+const levels = [
+  {
+    text: "Welcome! The sound is the same for everyone. Progress to personalize it based on your unique vibration.",
+    input: `<p>Default sound activated. Level up to unlock customization!</p>`,
+    value: function () { return null; },
+    infoFormat: function () { return null; },
+    updateSo: function () {
+      console.log("Default level - No changes.");
+    }
+  },
+  {
+    text: "Your **name** carries a vibrational frequency. We convert it into a numerical value to adjust the base note of the sound.",
+    input: `
+      <label for="name">Enter your name:</label>
+      <input type="text" id="name">
+    `,
+    value: function () { return document.getElementById("name")?.value || ""; },
+    infoFormat: function () {return this.value()},
+    updateSo: function () {
+      let value = this.value();
+      let nameValue = [...value].reduce((sum, char) => sum + char.charCodeAt(0), 0);
+      so.notaBase = 10 + (nameValue % 63);
+    }
+  },
+  {
+    text: "Your **height** affects resonance. Taller individuals may experience deeper tones.",
+    input: `
+      <label for="height">Enter your height (cm):</label>
+      <input type="number" id="height">
+    `,
+    value: function () { return parseFloat(document.getElementById("height")?.value) || 0; },
+    infoFormat: function () {return this.value() + ' cm'},
+    updateSo: function () {
+      let value = this.value();
+      so.numeroDeOctavas = Math.max(1, Math.min(8, Math.floor(value / 30)));
+    }
+  },
+  {
+    text: "Your **weight** influences sound absorption. We adjust the duration accordingly.",
+    input: `
+      <label for="weight">Enter your weight (kg):</label>
+      <input type="number" id="weight">
+    `,
+    value: function () { return parseFloat(document.getElementById("weight")?.value) || 0; },
+    infoFormat: function () {return this.value() + ' kg'},
+    updateSo: function () {
+      let value = this.value();
+      so.duracion = Math.max(10, Math.min(1000, value * 5));
+    }
+  },
+  {
+    text: "Colors have vibrational frequencies. Your **favorite color** influences the musical scale.",
+    input: `
+      <label for="color">Choose your favorite color:</label>
+      <select id="color">
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+        <option value="purple">Purple</option>
+      </select>
+    `,
+    value: function () { return document.getElementById("color")?.value || "major"; },
+    infoFormat: function () {return this.value()},
+    updateSo: function () {
+      let value = this.value();
+      const colorToScale = { red: "minor", blue: "major", green: "pentatonic", yellow: "dorian", purple: "phrygian" };
+      so.aroma = colorToScale[value.toLowerCase()] || "major";
+    }
+  },
+  {
+    text: "Your **mood** influences the complexity of the sound.",
+    input: `
+      <label for="mood">How do you feel?</label>
+      <select id="mood">
+        <option value="happy">Happy</option>
+        <option value="calm">Calm</option>
+        <option value="sad">Sad</option>
+        <option value="angry">Angry</option>
+      </select>
+    `,
+    value: function () { return document.getElementById("mood")?.value || "calm"; },
+    infoFormat: function () {return this.value()},
+    updateSo: function () {
+      let value = this.value();
+      const moodMap = { happy: 6, calm: 4, sad: 3, angry: 2 };
+      so.numNubes = moodMap[value.toLowerCase()] || 4;
+    }
+  },
+  {
+    text: "Each **element** has a sound profile. Choose yours!",
+    input: `
+      <label for="element">Select your element:</label>
+      <select id="element">
+        <option value="earth">Earth</option>
+        <option value="water">Water</option>
+        <option value="fire">Fire</option>
+        <option value="air">Air</option>
+        <option value="ether">Ether</option>
+      </select>
+    `,
+    value: function () { return document.getElementById("element")?.value || "air"; },
+    infoFormat: function () {return this.value()},
+    updateSo: function () {
+      let value = this.value();
+      const elementToVol = { fire: 1, water: 0.7, earth: 0.5, air: 0.8, ether: 0.9 };
+      so.mainVol = elementToVol[value.toLowerCase()] || 0.8;
+    }
+  },
+  {
+    text: "Your **birthdate** holds a numerical vibration that determines silent pauses.",
+    input: `
+      <label for="birthdate">Enter your birthdate:</label>
+      <input type="date" id="birthdate">
+    `,
+    value: function () { return document.getElementById("birthdate")?.value || ""; },
+    infoFormat: function () {return this.value()},
+    updateSo: function () {
+      let value = this.value();
+      let birthSum = value.split("-").reduce((sum, num) => sum + parseInt(num || 0), 0);
+      so.silencios = birthSum % 100;
+    }
+  },
+  {
+    text: "Your **zodiac sign** is linked to cosmic frequencies. We'll fine-tune the base note.",
+    input: `
+      <label for="zodiac">Choose your zodiac sign:</label>
+      <select id="zodiac">
+        <option value="aries">Aries</option>
+        <option value="taurus">Taurus</option>
+        <option value="gemini">Gemini</option>
+        <option value="cancer">Cancer</option>
+        <option value="leo">Leo</option>
+        <option value="virgo">Virgo</option>
+        <option value="libra">Libra</option>
+        <option value="scorpio">Scorpio</option>
+        <option value="sagittarius">Sagittarius</option>
+        <option value="capricorn">Capricorn</option>
+        <option value="aquarius">Aquarius</option>
+        <option value="pisces">Pisces</option>
+      </select>
+    `,
+    value: function () { return document.getElementById("zodiac")?.value || "aries"; },
+    infoFormat: function () {return this.value()},
+    updateSo: function () {
+      let value = this.value();
+      const zodiacTuning = { aries: 45, taurus: 42, gemini: 48, cancer: 36, leo: 52 };
+      so.notaBase = zodiacTuning[value.toLowerCase()] || so.notaBase;
+    }
+  },
+  {
+    text: "Time of day affects brainwave activity. Adjust your sound for energy or relaxation.",
+    input: `
+      <label for="timeOfDay">Select the time of day:</label>
+      <select id="timeOfDay">
+        <option value="morning">Morning</option>
+        <option value="afternoon">Afternoon</option>
+        <option value="night">Night</option>
+      </select>
+    `,
+    value: function () { return document.getElementById("timeOfDay")?.value || "afternoon"; },
+    infoFormat: function () {return this.value()},
+    updateSo: function () {
+      let value = this.value();
+      so.mainVol *= value === "morning" ? 1.2 : value === "night" ? 0.8 : 1;
+    }
   }
-
-  // Handle cases where step is 0 or invalid
-  if (step === 0) {
-    throw new Error("Step cannot be 0");
-  }
-
-  const result = [];
-  const isAscending = step > 0;
-
-  // Populate the range
-  for (let i = start; isAscending ? i < end : i > end; i += step) {
-    result.push(i);
-  }
-
-  return result;
-}
-
-const soundMinMax = {
-  duration: {
-    min: 0,
-    max: 100
-  }
-}
-/* const levels = [
-  {
-  text: 'level 0 : insert your name please to connect your vibe to the sound of it',
-  inputInnerHTML: '<input type="text" name="nameInput" id="nameInput"/>'
-  },
-  {
-  text: 'level 1 : define your age to follow your karma',
-  inputInnerHTML: '<input type="range" id="vol" name="vol" min="18" max="120">'
-  },
-  {
-  text: 'level 2 : chose the truth',
-  inputInnerHTML: `
-    <select id="conspiracySelect">
-        <option value="flatEarth">Flat Earth</option>
-        <option value="moonLanding">Moon Landing Hoax</option>
-        <option value="chemtrails">Chemtrails</option>
-        <option value="illuminati">The Illuminati</option>
-        <option value="newWorldOrder">New World Order</option>
-        <option value="lizardPeople">Lizard People Control the World</option>
-        <option value="JFK">JFK Assassination Cover-up</option>
-        <option value="area51">Aliens in Area 51</option>
-        <option value="5G">5G and Mind Control</option>
-        <option value="mandelaEffect">Mandela Effect</option>
-    </select>
-`
-  },
-  {
-  text: 'level 3 : fjyhkjhjhsadhfkjhsjkshasfhjkahfkja',
-  inputInnerHTML: '<input type="text" name="nameInput" id="nameInput">'
-  },
-  {
-  text: 'level 4 : fjyhkjhjhsadhfkjhsjkshasfhjkahfkja',
-  inputInnerHTML: '<input type="text" name="nameInput" id="nameInput">'
-  },
-] */
-/* const levels = [
-  {
-    feature: 'currentMonth',
-    mode: 'time',             //special
-    speed: 20,
-    min: null,             
-    max: null,             
-    values: [],           //only in array mode
-    soundMod: 'numeroDeOctavas',
-    cb: function() {
-      const currentDate = new Date();
-      const month = currentDate.getMonth();
-      return mapNumRange(
-        month, 
-        0, 
-        23,
-        5, 
-        85
-      ) 
-    }
-  },
-  {
-    feature: 'name',
-    mode: 'string',
-    speed: 20,
-    min: 1,              //in string mode indicates min chars
-    max: 15,             //only in string mode indicates min chars
-    values: [],           //only in array mode
-    soundMod: 'notabase', //el factor de objeco s que va a modificar
-    cb: function() {
-      return str2MinMax(
-        value,
-        55,               //el min valor que puede soundMod
-        100               //el min valor que puede soundMod
-      )
-    }
-  },
-  {
-    feature: 'height',
-    mode: 'number',
-    speed: 20,
-    min: 65,              
-    max: 210,             
-    values: [],           //only in array mode
-    soundMod: 'duration',
-    cb: function() {
-      return mapNumRange(
-        value, 
-        this.min, 
-        this.max,
-        5, 
-        1312
-      )
-    }
-  },
-  {
-    feature: 'zodiac',
-    mode: 'array',
-    speed: 20,
-    min: null,             
-    max: null,             
-    values: ['Aries', 'Tauro', 'Géminis', 'Cáncer', 'Leo', 'Virgo', 'Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis'],           //only in array mode
-    soundMod: 'duration',
-    cb: function() {
-      return mapNumRange(
-        value, 
-        this.min, 
-        this.max,
-        5, 
-        1312
-      )
-    }
-  },  
-  {
-    feature: 'currentHour',
-    mode: 'time',             //special
-    speed: 20,
-    min: null,             
-    max: null,             
-    values: [],           //only in array mode
-    soundMod: 'numeroDeOctavas',
-    cb: function() {
-      const currentDate = new Date();
-      const hours = currentDate.getHours();
-      return mapNumRange(
-        hours, 
-        0, 
-        23,
-        5, 
-        85
-      ) 
-    }
-  },
-];   */
-
-  /* {
-    speed: 20,
-    feature : 'name',
-    values: ['Luigi'],
-    armonic : [],
-    sound: 'duracion',
-    min: 10,
-    max: 66,
-    mode: 'string'
-  },
-  {
-    id: 1,
-    speed: 11,
-    feature : 'altura',
-    values : range(60, 220),
-    inputType : 'range',
-    armonic : [],
-    sound: 'duracion',
-    min: 10,
-    max: 66,
-    mode: 'number'
-  },
-  {
-    id: 2,
-    speed: 5,
-    feature : 'peso',
-    values : range(40, 300),
-    inputType : 'range',
-    armonic : [],
-    sound: 'duracion',
-    min: 10,
-    max: 66,
-    mode: 'number'
-  },
-  {
-    id: 2,
-    speed: 9,
-    feature : 'edad',
-    values : range(18, 120),
-    inputType : 'range',
-    armonic : [],
-    sound: 'duracion',
-    min: 10,
-    max: 66,
-    mode: 'number' 
-  } {
-    id: .2,
-    speed: 80,
-    feature : 'zodiaco',
-    /* values : [], 
-    values : [ 'Aries', 'Tauro', 'Géminis', 'Cáncer', 'Leo', 'Virgo', 'Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis'],
-    armonic : [],
-    sound: 'duracion',
-    min: 10,
-    max: 66,
-    mode: 'string',
-  } */
+];
