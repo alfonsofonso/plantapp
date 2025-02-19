@@ -29,24 +29,37 @@ const soundMinMax = {
 }
 const levels = [
   {
-  text: 'level 0 : fjyhkjhjhsadhfkjhsjkshasfhjkahfkja',
-  /* inputInnerHTML: '<input type="text" */ 
+  text: 'level 0 : insert your name please to connect your vibe to the sound of it',
+  inputInnerHTML: '<input type="text" name="nameInput" id="nameInput"/>'
   },
   {
-  text: 'level 1 : fjyhkjhjhsadhfkjhsjkshasfhjkahfkja',
-  /* inputInnerHTML: '<input type="text" */ 
+  text: 'level 1 : define your age to follow your karma',
+  inputInnerHTML: '<input type="range" id="vol" name="vol" min="18" max="120">'
   },
   {
-  text: 'level 2 : fjyhkjhjhsadhfkjhsjkshasfhjkahfkja',
-  /* inputInnerHTML: '<input type="text" */ 
+  text: 'level 2 : chose the truth',
+  inputInnerHTML: `
+    <select id="conspiracySelect">
+        <option value="flatEarth">Flat Earth</option>
+        <option value="moonLanding">Moon Landing Hoax</option>
+        <option value="chemtrails">Chemtrails</option>
+        <option value="illuminati">The Illuminati</option>
+        <option value="newWorldOrder">New World Order</option>
+        <option value="lizardPeople">Lizard People Control the World</option>
+        <option value="JFK">JFK Assassination Cover-up</option>
+        <option value="area51">Aliens in Area 51</option>
+        <option value="5G">5G and Mind Control</option>
+        <option value="mandelaEffect">Mandela Effect</option>
+    </select>
+`
   },
   {
   text: 'level 3 : fjyhkjhjhsadhfkjhsjkshasfhjkahfkja',
-  /* inputInnerHTML: '<input type="text" */ 
+  inputInnerHTML: '<input type="text" name="nameInput" id="nameInput">'
   },
   {
   text: 'level 4 : fjyhkjhjhsadhfkjhsjkshasfhjkahfkja',
-  /* inputInnerHTML: '<input type="text" */ 
+  inputInnerHTML: '<input type="text" name="nameInput" id="nameInput">'
   },
 ]
 /* const levels = [

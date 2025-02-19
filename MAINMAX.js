@@ -21,6 +21,7 @@ const playButt = document.getElementById('playButt')
 const myProgress = document.getElementById('myProgress')
 const userData = document.getElementById("userdata")
 const text = document.getElementById("text")
+const input = document.getElementById("input")
 
 //////////////////////////////////////////     functions   //////////////////////////////
 let i = 0;
@@ -107,7 +108,9 @@ function addVariable(valor){
 const levelAlert = () => {
   console.log('alert from level ', nivel);
   text.innerText = levels[nivel].text;
+  input.innerHTML = levels[nivel].inputInnerHTML;
   text.style.display = 'block';
+  input.style.display = 'block';
   playButt.onclick = levelUP;
 }
 const levelUP = () => {
@@ -115,6 +118,7 @@ const levelUP = () => {
   console.log('levelUP to ', nivel)
   barAnimation();
   text.style.display = 'none';
+  input.style.display = 'none';
   playButt.disabled = true;
   playButt.onclick = levelAlert;
 }
