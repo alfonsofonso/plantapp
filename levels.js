@@ -27,7 +27,7 @@ const soundMinMax = {
     max: 100
   }
 }
-const levels = [
+/* const levels = [
   {
   text: 'level 0 : insert your name please to connect your vibe to the sound of it',
   inputInnerHTML: '<input type="text" name="nameInput" id="nameInput"/>'
@@ -61,7 +61,7 @@ const levels = [
   text: 'level 4 : fjyhkjhjhsadhfkjhsjkshasfhjkahfkja',
   inputInnerHTML: '<input type="text" name="nameInput" id="nameInput">'
   },
-]
+] */
 /* const levels = [
   {
     feature: 'currentMonth',

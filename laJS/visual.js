@@ -49,20 +49,7 @@ function info(){
   console.log("........fluon, fluir(),  Oido.escucha(), grupo, volumenSounds()..............");
 }
 
-onload=function(){
-	initVisual();
-  context.resume();
-	clock.tempo=120;//el tempo en lissajousJS
-  barAnimation();
-  info()// un console log
-  console.log(this.localStorage);
-  if (this.localStorage.length === 0) {
-    console.log('new session');
-  } else {
-    const data = JSON.parse(localStorage.getItem("data"));
-    so = data.so;
-  }
-}
+
 
 /////     HELPERS
 function tick(event) {
