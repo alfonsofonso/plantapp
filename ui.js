@@ -139,55 +139,6 @@ const playClick = () => {
   }
 }
 
-
-
-const upgradeLevel = () => {
-  //const actualLevel = levels[nivel];
-
-  /* levelUP.disabled = true;
-  levelInput.style.display = 'none';
-  levelUP.style.display = 'block';
-  const newLevel = levels[nivel + 1];
-
-  let value = newLevel.values[indexValue];
-  
-  console.log(value,"mi value")
- 
-  levelUP.innerText = levels[nivel + 2].feature;
-
-  if (newLevel.mode === 'string') {
-    so[newLevel.sound] = str2MinMax(value, newLevel.min, newLevel.max);
-  }
-  else if (newLevel.mode === 'number') {
-    console.log(
-      value, 
-      newLevel.values[0], 
-      newLevel.values[newLevel.values.length - 1],
-      newLevel.min, 
-      newLevel.max
-    )
-    so[newLevel.sound] = mapNumRange(
-      value, 
-      newLevel.values[0], 
-      newLevel.values[newLevel.values.length - 1],
-      newLevel.min, 
-      newLevel.max
-    )
-    indexValue = newLevel.values.length / 2
-  }
-
-  userData[newLevel.feature] = value; */
-  barSpeed = newLevel.speed;
-  console.log(so)
-  i = 0;
-  /* myBar.style.width = '0%'; */
-  barAnimation()
-  nivel++;
-  addVariable(value);
-
-  /* updatesound(s); AQUI LE DAS DE COMER EL so  */ 
-}
-
 onload=function(){
 	initVisual();
   context.resume();
