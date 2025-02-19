@@ -43,12 +43,13 @@ function barAnimation() {
         clearInterval(id);
         i = 0;
         width = 1;
-        if (levels.length > nivel-1) {
+
+        if (levels.length > nivel-1) {// que quiere decir esto?
           playButt.disabled = false;
           levelAlert()
         }
-        return ;
-      } else {
+        return ;// y este return?
+      } else {// y esto?
         width += barSpeed;
         myBar.style.width = width/10 + "%";
       }
@@ -195,10 +196,13 @@ onload=function(){
   barAnimation();
   info()// un console log
   console.log(this.localStorage);
+  //initHeal()
+
   if (this.localStorage.length === 0) {
     console.log('new session');
   } else {
     const data = JSON.parse(localStorage.getItem("data"));
-    so = data.so;
+    console.log("aqui nos quedamos",data);
+    //so = data.so; borrado porque daba error
   }
 }
