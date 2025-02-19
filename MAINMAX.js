@@ -108,16 +108,6 @@ function addVariable(valor){
   d.innerText = newLevel.feature + ": "+ valor;
   userData.appendChild(d);
 }
-const levelAlert = () => {
-  console.log('alert from level ', nivel);
-  text.innerText = levels[nivel].text;
-  input.innerHTML = levels[nivel].inputInnerHTML;
-  text.style.display = 'block';
-  input.style.display = 'block';
-  mycanvas.style.opacity = 0.5;
-  my
-  playButt.onclick = levelUP;
-}
 const levelUP = () => {
   nivel++;
   console.log('levelUP to ', nivel)
@@ -125,10 +115,28 @@ const levelUP = () => {
   text.style.display = 'none';
   input.style.display = 'none';
   playButt.disabled = true;
-  playButt.onclick = levelAlert;
-  mycanvas.style.opacity = 1;           //no anda
+  /* playButt.onclick = null; */
+  /* mycanvas.style.opacity = 1; */           //no anda
+  levels[nivel].callback();
+}
+const levelAlert = () => {
+  console.log('alert from level ', nivel);
+  text.innerText = levels[nivel].text;
+  input.innerHTML = levels[nivel].inputInnerHTML;
+  text.style.display = 'block';
+  input.style.display = 'block';
+ /*  mycanvas.style.opacity = 0.5; */
+  playButt.onclick = levelUP;
+  console.log(playButt)
 }
 
+const play = () => {
+  if (nivel === -1) {
+    initHeal()
+  } else {
+    levelUP()
+  }
+}
 /* let so = { 
   mainVol: 0.8, // 0-1
   notaBase: 40, // 10-72
