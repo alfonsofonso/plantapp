@@ -24,7 +24,7 @@ const text = document.getElementById("text")
 const input = document.getElementById("input")
 const mycanvas = document.getElementById("mycanvas")   //no anda
 
-
+let user = [null]
 //////////////////////////////////////////     functions   //////////////////////////////
 let i = 0;
 function barAnimation() {
@@ -44,7 +44,6 @@ function barAnimation() {
         i = 0;
         width = 1;
         if (levels.length > nivel-1) {
-          console.log('cazzo')
           playButt.disabled = false;
           levelAlert()
         }
@@ -56,13 +55,11 @@ function barAnimation() {
     }
   }
 }
-/* playButt.addEventListener('click', )
- */function initHeal(){
+function initHeal(){
   console.log('initheal')
   playButt.disabled = true;
   playButt.onclick = levelAlert;
   text.style.display = 'none';
-
 	if(context.state!="runing"){
 		context.resume();
 	}
@@ -110,214 +107,197 @@ function addVariable(valor){
 }
 const levelUP = () => {
   nivel++;
-  console.log('levelUP to ', nivel)
+  console.log('levelUP to ', nivel, user)
+  console.log('value of input at level ', nivel, ' : ', levels[nivel].value());
+  console.log(levels[nivel])
   barAnimation();
   text.style.display = 'none';
   input.style.display = 'none';
   playButt.disabled = true;
-  /* playButt.onclick = null; */
+  levels[nivel].updateSo()
+  console.log(so);
   /* mycanvas.style.opacity = 1; */           //no anda
-  levels[nivel].callback();
 }
 const levelAlert = () => {
   console.log('alert from level ', nivel);
   text.innerText = levels[nivel].text;
-  input.innerHTML = levels[nivel].inputInnerHTML;
+  input.innerHTML = levels[nivel].input;
   text.style.display = 'block';
   input.style.display = 'block';
  /*  mycanvas.style.opacity = 0.5; */
-  playButt.onclick = levelUP;
-  console.log(playButt)
+  /* playButt.onclick = levelUP; */
 }
 
-const play = () => {
+const playClick = () => {
   if (nivel === -1) {
     initHeal()
   } else {
     levelUP()
   }
 }
-/* let so = { 
-  mainVol: 0.8, // 0-1
-  notaBase: 40, // 10-72
-  numNubes: 4,
-  numeroDeOctavas: 4, // 1-8 (related to notaBase)
-  duracion: 100, // 1-1000
-  silencios: 100, // to be determined
-  aroma: "major"
-}; */
 
 const levels = [
   {
-      text: "Welcome! The sound is the same for everyone. Progress to personalize it based on your unique vibration.",
-      callback: () => {
-          document.getElementById("input").innerHTML = "<p>Default sound activated. Level up to unlock customization!</p>";
-      }
+    text: "Welcome! The sound is the same for everyone. Progress to personalize it based on your unique vibration.",
+    input: `<p>Default sound activated. Level up to unlock customization!</p>`,
+    value: function () { return null; },
+    updateSo: function () {
+      console.log("Default level - No changes.");
+    }
   },
   {
-      text: "Your **name** carries a vibrational frequency. We convert it into a numerical value to adjust the base note of the sound.",
-      callback: () => {
-          document.getElementById("input").innerHTML = `
-              <label for="name">Enter your name:</label>
-              <input type="text" id="name" oninput="updateSo(2, this.value)">
-          `;
-      }
+    text: "Your **name** carries a vibrational frequency. We convert it into a numerical value to adjust the base note of the sound.",
+    input: `
+      <label for="name">Enter your name:</label>
+      <input type="text" id="name">
+    `,
+    value: function () { return document.getElementById("name")?.value || ""; },
+    updateSo: function () {
+      let value = this.value();
+      let nameValue = [...value].reduce((sum, char) => sum + char.charCodeAt(0), 0);
+      so.notaBase = 10 + (nameValue % 63);
+    }
   },
   {
-      text: "Your **height** affects resonance. Taller individuals may experience deeper tones.",
-      callback: () => {
-          document.getElementById("input").innerHTML = `
-              <label for="height">Enter your height (cm):</label>
-              <input type="number" id="height" oninput="updateSo(3, this.value)">
-          `;
-      }
+    text: "Your **height** affects resonance. Taller individuals may experience deeper tones.",
+    input: `
+      <label for="height">Enter your height (cm):</label>
+      <input type="number" id="height">
+    `,
+    value: function () { return parseFloat(document.getElementById("height")?.value) || 0; },
+    updateSo: function () {
+      let value = this.value();
+      so.numeroDeOctavas = Math.max(1, Math.min(8, Math.floor(value / 30)));
+    }
   },
   {
-      text: "Your **weight** influences sound absorption. We adjust the duration accordingly.",
-      callback: () => {
-          document.getElementById("input").innerHTML = `
-              <label for="weight">Enter your weight (kg):</label>
-              <input type="number" id="weight" oninput="updateSo(4, this.value)">
-          `;
-      }
+    text: "Your **weight** influences sound absorption. We adjust the duration accordingly.",
+    input: `
+      <label for="weight">Enter your weight (kg):</label>
+      <input type="number" id="weight">
+    `,
+    value: function () { return parseFloat(document.getElementById("weight")?.value) || 0; },
+    updateSo: function () {
+      let value = this.value();
+      so.duracion = Math.max(10, Math.min(1000, value * 5));
+    }
   },
   {
-      text: "Colors have vibrational frequencies. Your **favorite color** influences the musical scale.",
-      callback: () => {
-          document.getElementById("input").innerHTML = `
-              <label for="color">Choose your favorite color:</label>
-              <select id="color" onchange="updateSo(5, this.value)">
-                  <option value="red">Red</option>
-                  <option value="blue">Blue</option>
-                  <option value="green">Green</option>
-                  <option value="yellow">Yellow</option>
-                  <option value="purple">Purple</option>
-              </select>
-          `;
-      }
+    text: "Colors have vibrational frequencies. Your **favorite color** influences the musical scale.",
+    input: `
+      <label for="color">Choose your favorite color:</label>
+      <select id="color">
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+        <option value="purple">Purple</option>
+      </select>
+    `,
+    value: function () { return document.getElementById("color")?.value || "major"; },
+    updateSo: function () {
+      let value = this.value();
+      const colorToScale = { red: "minor", blue: "major", green: "pentatonic", yellow: "dorian", purple: "phrygian" };
+      so.aroma = colorToScale[value.toLowerCase()] || "major";
+    }
   },
   {
-      text: "Your **mood** influences the complexity of the sound.",
-      callback: () => {
-          document.getElementById("input").innerHTML = `
-              <label for="mood">How do you feel?</label>
-              <select id="mood" onchange="updateSo(6, this.value)">
-                  <option value="happy">Happy</option>
-                  <option value="calm">Calm</option>
-                  <option value="sad">Sad</option>
-                  <option value="angry">Angry</option>
-              </select>
-          `;
-      }
+    text: "Your **mood** influences the complexity of the sound.",
+    input: `
+      <label for="mood">How do you feel?</label>
+      <select id="mood">
+        <option value="happy">Happy</option>
+        <option value="calm">Calm</option>
+        <option value="sad">Sad</option>
+        <option value="angry">Angry</option>
+      </select>
+    `,
+    value: function () { return document.getElementById("mood")?.value || "calm"; },
+    updateSo: function () {
+      let value = this.value();
+      const moodMap = { happy: 6, calm: 4, sad: 3, angry: 2 };
+      so.numNubes = moodMap[value.toLowerCase()] || 4;
+    }
   },
   {
-      text: "Each **element** has a sound profile. Choose yours!",
-      callback: () => {
-          document.getElementById("input").innerHTML = `
-              <label for="element">Select your element:</label>
-              <select id="element" onchange="updateSo(7, this.value)">
-                  <option value="earth">Earth</option>
-                  <option value="water">Water</option>
-                  <option value="fire">Fire</option>
-                  <option value="air">Air</option>
-                  <option value="ether">Ether</option>
-              </select>
-          `;
-      }
+    text: "Each **element** has a sound profile. Choose yours!",
+    input: `
+      <label for="element">Select your element:</label>
+      <select id="element">
+        <option value="earth">Earth</option>
+        <option value="water">Water</option>
+        <option value="fire">Fire</option>
+        <option value="air">Air</option>
+        <option value="ether">Ether</option>
+      </select>
+    `,
+    value: function () { return document.getElementById("element")?.value || "air"; },
+    updateSo: function () {
+      let value = this.value();
+      const elementToVol = { fire: 1, water: 0.7, earth: 0.5, air: 0.8, ether: 0.9 };
+      so.mainVol = elementToVol[value.toLowerCase()] || 0.8;
+    }
   },
   {
-      text: "Your **birthdate** holds a numerical vibration that determines silent pauses.",
-      callback: () => {
-          document.getElementById("input").innerHTML = `
-              <label for="birthdate">Enter your birthdate:</label>
-              <input type="date" id="birthdate" onchange="updateSo(8, this.value)">
-          `;
-      }
+    text: "Your **birthdate** holds a numerical vibration that determines silent pauses.",
+    input: `
+      <label for="birthdate">Enter your birthdate:</label>
+      <input type="date" id="birthdate">
+    `,
+    value: function () { return document.getElementById("birthdate")?.value || ""; },
+    updateSo: function () {
+      let value = this.value();
+      let birthSum = value.split("-").reduce((sum, num) => sum + parseInt(num || 0), 0);
+      so.silencios = birthSum % 100;
+    }
   },
   {
-      text: "Your **zodiac sign** is linked to cosmic frequencies. We'll fine-tune the base note.",
-      callback: () => {
-          document.getElementById("input").innerHTML = `
-              <label for="zodiac">Choose your zodiac sign:</label>
-              <select id="zodiac" onchange="updateSo(9, this.value)">
-                  <option value="aries">Aries</option>
-                  <option value="taurus">Taurus</option>
-                  <option value="gemini">Gemini</option>
-                  <option value="cancer">Cancer</option>
-                  <option value="leo">Leo</option>
-                  <option value="virgo">Virgo</option>
-                  <option value="libra">Libra</option>
-                  <option value="scorpio">Scorpio</option>
-                  <option value="sagittarius">Sagittarius</option>
-                  <option value="capricorn">Capricorn</option>
-                  <option value="aquarius">Aquarius</option>
-                  <option value="pisces">Pisces</option>
-              </select>
-          `;
-      }
+    text: "Your **zodiac sign** is linked to cosmic frequencies. We'll fine-tune the base note.",
+    input: `
+      <label for="zodiac">Choose your zodiac sign:</label>
+      <select id="zodiac">
+        <option value="aries">Aries</option>
+        <option value="taurus">Taurus</option>
+        <option value="gemini">Gemini</option>
+        <option value="cancer">Cancer</option>
+        <option value="leo">Leo</option>
+        <option value="virgo">Virgo</option>
+        <option value="libra">Libra</option>
+        <option value="scorpio">Scorpio</option>
+        <option value="sagittarius">Sagittarius</option>
+        <option value="capricorn">Capricorn</option>
+        <option value="aquarius">Aquarius</option>
+        <option value="pisces">Pisces</option>
+      </select>
+    `,
+    value: function () { return document.getElementById("zodiac")?.value || "aries"; },
+    updateSo: function () {
+      let value = this.value();
+      const zodiacTuning = { aries: 45, taurus: 42, gemini: 48, cancer: 36, leo: 52 };
+      so.notaBase = zodiacTuning[value.toLowerCase()] || so.notaBase;
+    }
   },
   {
-      text: "Time of day affects brainwave activity. Adjust your sound for energy or relaxation.",
-      callback: () => {
-          document.getElementById("input").innerHTML = `
-              <label for="timeOfDay">Select the time of day:</label>
-              <select id="timeOfDay" onchange="updateSo(10, this.value)">
-                  <option value="morning">Morning</option>
-                  <option value="afternoon">Afternoon</option>
-                  <option value="night">Night</option>
-              </select>
-          `;
-      }
+    text: "Time of day affects brainwave activity. Adjust your sound for energy or relaxation.",
+    input: `
+      <label for="timeOfDay">Select the time of day:</label>
+      <select id="timeOfDay">
+        <option value="morning">Morning</option>
+        <option value="afternoon">Afternoon</option>
+        <option value="night">Night</option>
+      </select>
+    `,
+    value: function () { return document.getElementById("timeOfDay")?.value || "afternoon"; },
+    updateSo: function () {
+      let value = this.value();
+      so.mainVol *= value === "morning" ? 1.2 : value === "night" ? 0.8 : 1;
+    }
   }
 ];
 
-// Function to update `so` object
-function updateSo(level, value) {
-  switch (level) {
-      case 2:
-          let nameValue = [...value].reduce((sum, char) => sum + char.charCodeAt(0), 0);
-          so.notaBase = 10 + (nameValue % 63);
-          break;
-      case 3:
-          so.numeroDeOctavas = Math.max(1, Math.min(8, Math.floor(value / 30)));
-          break;
-      case 4:
-          so.duracion = Math.max(10, Math.min(1000, value * 5));
-          break;
-      case 5:
-          const colorToScale = { red: "minor", blue: "major", green: "pentatonic", yellow: "dorian", purple: "phrygian" };
-          so.aroma = colorToScale[value.toLowerCase()] || "major";
-          break;
-      case 6:
-          const moodMap = { happy: 6, calm: 4, sad: 3, angry: 2 };
-          so.numNubes = moodMap[value.toLowerCase()] || 4;
-          break;
-      case 7:
-          const elementToVol = { fire: 1, water: 0.7, earth: 0.5, air: 0.8, ether: 0.9 };
-          so.mainVol = elementToVol[value.toLowerCase()] || 0.8;
-          break;
-      case 8:
-          let birthSum = value.split("-").reduce((sum, num) => sum + parseInt(num), 0);
-          so.silencios = birthSum % 100;
-          break;
-      case 9:
-          const zodiacTuning = { aries: 45, taurus: 42, gemini: 48, cancer: 36, leo: 52 };
-          so.notaBase = zodiacTuning[value.toLowerCase()] || so.notaBase;
-          break;
-      case 10:
-          so.mainVol *= value === "morning" ? 1.2 : value === "night" ? 0.8 : 1;
-          break;
-  }
-  console.log("Updated so:", so);
-}
 
-// Function to level up
-function levelUp(newLevel) {
-  if (levels[newLevel]) {
-      document.getElementById("level-text").innerHTML = levels[newLevel].text;
-      levels[newLevel].callback();
-  }
-}
+
+
 
 const upgradeLevel = () => {
   //const actualLevel = levels[nivel];
@@ -365,7 +345,6 @@ const upgradeLevel = () => {
 
   /* updatesound(s); AQUI LE DAS DE COMER EL so  */ 
 }
-
 
 onload=function(){
 	initVisual();
