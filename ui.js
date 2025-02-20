@@ -1,34 +1,29 @@
-
-//////////////////////////////////////////     globales   //////////////////////////////
-
 var nivel = -1;
+var barSpeed=10
 
-var nubes=[];
-var numNubes=5;
-var grupo;
-var barSpeed=100
-
-var escalas=['ionian','melodicminor','wholetone','diminished','blues','pentatonicmajor',
- 'pentatonicminor','flamenco','altered','bebopdominant','bebopdominantflatnine',
- 'bebopmajor','bebopminor','major','major7','major6','dominant','dominantflat5',"augmented",
- 'minor','minor7','minor6','dim','minorflat5','sus4','sus2','fouths','fifth','tritone',
- 'hexatonic','chromatic',"octaves"];
-var nombresNotas=["C", "Db", "D", "Eb", "E","F", "Gb", "G", "Ab", "A", "Bb", "B" ];
-
-//////////////////////////////////////////     instrumentos   //////////////////////////////
 const myBar = document.getElementById("myBar");
 const playButt = document.getElementById('playButt')
 const myProgress = document.getElementById('myProgress')
 const userData = document.getElementById("userdata")
 const text = document.getElementById("text")
+/* const showText = document.getElementById("showText") */
 const input = document.getElementById("input")
+const levelLog = document.getElementById("levelLog");
 const mycanvas = document.getElementById("mycanvas")   //no anda
 
+<<<<<<< HEAD
 let user = []
 let iNiv = 0;// no llames una variable global i  porfa, colisionan demasiado a menudo
               /// las globales con nombre propio... muy propio! que significa esta variable? 
 
 //////////////////////////////////////////     functions   //////////////////////////////
+=======
+let user = [];
+let i = 0;
+let data = null;
+let welcome = true;
+
+>>>>>>> a67b2eb57013694d1154cb5b3983dc0dbd1f1177
 function barAnimation() {
   console.log('baranimation')
   if (iNiv == 0) {
@@ -38,14 +33,25 @@ function barAnimation() {
     
     function frame() {///// avanza barra
       //console.log(width)
+<<<<<<< HEAD
       if (width >= 1000) { // si llega al final de la barra
         if (nivel==-1) {
           playButt.style.display="block"
           nivel=0
+=======
+      if (width >= 1000) {
+        playButt.style.display="block";
+        if (welcome) {
+          welcome = false  // repetido?
+          welcomeAlert();
+        } else if (levels.length > nivel-1) {// que quiere decir esto? SI QUEDAN NIVELES EN ARRAY
+          levelAlert();
+>>>>>>> a67b2eb57013694d1154cb5b3983dc0dbd1f1177
         }
         clearInterval(id);
         iNiv = 0;
         width = 1;
+<<<<<<< HEAD
         if (levels.length > nivel-1) {// que quiere decir esto?
          //playButt.style.display = "none";
          playButt.disabled= false
@@ -53,6 +59,9 @@ function barAnimation() {
         }
         return ;//
       } else {// sigue creciendo la barra 
+=======
+      } else {// y esto? LA BARRA SIGUE LLENANDOSE
+>>>>>>> a67b2eb57013694d1154cb5b3983dc0dbd1f1177
         width += barSpeed;
         myBar.style.width = width/10 + "%";
       }
@@ -69,50 +78,26 @@ function initHeal(){
 	}
   nivel = 0;
   barAnimation()
+  levelLog.innerHTML = nivel;
 	creaArr();// iniciar sonido
 }
 
-function creaArr(){//n=num notas	
-	grupo=new group();
-	for(var i=0;i<so.numNubes;i++){
-		nubes[i]=new track(); ///lissajousJS
-		var d=eval("walk."+yuxtapon(so.aroma)+"("+so.notaBase+","+so.numeroDeOctavas+")");
-		nubes[i].beat(so.duracion).notes(d).nl(so.duracion)
-			.adsr(so.duracion/4,so.duracion/3,.6,so.duracion/2).vol(so.mainVol*0.25/nubes.length)
-			.trans(Math.random()/10);
-		grupo.add(nubes[i]);
-	};
-	console.log("nubes: "+so.numNubes+" dur: "+so.duracion+" aroma: "+so.aroma)
-  //return [so]
-
-}
-yuxtapon=function(q){///???
- return q=q.replace(/\s/g, '');
-
-}
-function destruyeArr(){// vacia nubes
-	console.log("diluyo nubes: "+nubes.length)
-	for(var i=0;i<nubes.length;i++){
-		nubes[i].destroy();
-		delete nubes[i];
-	};	
-	nubes=[];
-}
-
-
-//////////////////////////////////////////     start    //////////////////////////////
-
-
-function addVariable(){
+function addLog(lvl, value){
+  console.log(lvl, value);
+  console.log(levels[lvl]);
   let li = document.createElement("li");
-  li.className = "userInfo";
-  if (levels[nivel].infoFormat()) {
-    li.innerText = levels[nivel].infoFormat();
+  li.className = "userLog";
+  if (value) {
+    li.innerText = levels[lvl].prefx + value + levels[lvl].suffx;
     userData.appendChild(li);
   }
 }
+
 const levelUP = () => {
   const newValue = levels[nivel].value();
+  if (!newValue) {
+    return ;
+  }
   user.push(newValue)
   console.log('levelUP to ', nivel+1, user)
   console.log('value of input at level ', nivel, ' : ', newValue);
@@ -121,72 +106,80 @@ const levelUP = () => {
   input.style.display = 'none';
   playButt.disabled = true;
   levels[nivel].updateSo()
+<<<<<<< HEAD
   if(nivel==0){initHeal()}
   addVariable()
+=======
+  console.log(so);
+  localStorage.setItem('data', JSON.stringify({user: user, so: so}))
+  addLog(nivel, newValue)
+  levelLog.innerHTML = nivel;
+>>>>>>> a67b2eb57013694d1154cb5b3983dc0dbd1f1177
   nivel++;
   /* mycanvas.style.opacity = 1; */           //no anda
 }
+
 const levelAlert = () => {
   console.log('alert from level ', nivel);
   text.innerText = levels[nivel].text;
   input.innerHTML = levels[nivel].input;
   text.style.display = 'block';
   input.style.display = 'block';
+  playButt.disabled = false;
+ /*  mycanvas.style.opacity = 0.5; */
+  /* playButt.onclick = levelUP; */
+}
+const welcomeAlert = () => {
+  console.log('welcome from level ', nivel);
+  const wellcomeText = user[1]
+  ? 'Wellcome back ' + user[1] + ' you can restart you experience from level ' + nivel
+  : "Welcome! The sound is the same for everyone. Progress to personalize it based on your unique vibration."
+  text.innerText = wellcomeText;
+  text.style.display = 'block';
+  playButt.disabled = false;
+  welcome = false;
  /*  mycanvas.style.opacity = 0.5; */
   /* playButt.onclick = levelUP; */
 }
 
 const playClick = () => {
+<<<<<<< HEAD
+=======
+  if (welcome) {
+    
+  }
+  welcome = false;
+  if (nivel === 0) {
+    initHeal()
+  } else {
+>>>>>>> a67b2eb57013694d1154cb5b3983dc0dbd1f1177
     levelUP()
 }
 
+const loadGame = () => {
+  data = JSON.parse(localStorage.getItem("data"));
+  so = data.so;
+  user = data.user;
+  nivel = user.length - 1;
+  levelLog.innerHTML = nivel;
+  for (let u = 0; u < user.length; u++) { //populate userInfo
+    const log = user[u];
+    if (log !== null) {
+      addLog(u, log)
+    }
+  };
+};
 
-
-const upgradeLevel = () => {
-  //const actualLevel = levels[nivel];
-
-  /* levelUP.disabled = true;
-  levelInput.style.display = 'none';
-  levelUP.style.display = 'block';
-  const newLevel = levels[nivel + 1];
-
-  let value = newLevel.values[indexValue];
-  
-  console.log(value,"mi value")
- 
-  levelUP.innerText = levels[nivel + 2].feature;
-
-  if (newLevel.mode === 'string') {
-    so[newLevel.sound] = str2MinMax(value, newLevel.min, newLevel.max);
+function checkLocalStorage() {
+  if (localStorage.getItem('data') !== null) {
+      console.log("'data' key exists in localStorage.");
+      loadGame();
+      return true;
+  } else {
+      console.log("'data' key is not present in localStorage.");
+      initHeal()
+      return false;
   }
-  else if (newLevel.mode === 'number') {
-    console.log(
-      value, 
-      newLevel.values[0], 
-      newLevel.values[newLevel.values.length - 1],
-      newLevel.min, 
-      newLevel.max
-    )
-    so[newLevel.sound] = mapNumRange(
-      value, 
-      newLevel.values[0], 
-      newLevel.values[newLevel.values.length - 1],
-      newLevel.min, 
-      newLevel.max
-    )
-    indexValue = newLevel.values.length / 2
-  }
-
-  userData[newLevel.feature] = value; */
-  barSpeed = newLevel.speed;
-  console.log(so)
-  i = 0;
-  /* myBar.style.width = '0%'; */
-  barAnimation()
-  nivel++;
-  addVariable(value);
-
-  /* updatesound(s); AQUI LE DAS DE COMER EL so  */ 
 }
 
 onload=function(){
@@ -194,15 +187,27 @@ onload=function(){
   context.resume();
 	clock.tempo=120;//el tempo en lissajousJS
   barAnimation();
-  info()// un console log
-  console.log(this.localStorage);
-  //initHeal()
-
-  if (this.localStorage.length === 0) {
-    console.log('new session');
-  } else {
-    const data = JSON.parse(localStorage.getItem("data"));
-    console.log("aqui nos quedamos",data);
-    //so = data.so; borrado porque daba error
-  }
+  info();// un console log
+  checkLocalStorage();
 }
+
+const resetLocalStorage = () => {
+  console.log('reset data')
+  localStorage.removeItem("data");
+  console.log(localStorage);
+  location.reload();
+}
+/* 
+showText.addEventListener("mousedown", () => {
+  text.style.display = "block";
+});
+
+// Hide text when released
+showText.addEventListener("mouseup", () => {
+  text.style.display = "none";
+});
+
+// Also hide when mouse leaves the button
+showText.addEventListener("mouseleave", () => {
+  text.style.display = "none";
+}); */

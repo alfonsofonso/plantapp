@@ -3,7 +3,8 @@ const levels = [
     text: "Welcome! The sound is the same for everyone. Progress to personalize it based on your uniqueness.",
     input: `<p>Level up to unlock customization!</p>`,
     value: function () { return null; },
-    infoFormat: function () { return null; },
+    prefx: null,
+    suffx: null,
     updateSo: function () {
       console.log("Default level - No changes.");
     }
@@ -15,7 +16,8 @@ const levels = [
       <input type="text" id="name">
     `,
     value: function () { return document.getElementById("name")?.value || ""; },
-    infoFormat: function () {return this.value()},
+    prefx: '',
+    suffx: '',
     updateSo: function () {
       let value = this.value();
       let nameValue = [...value].reduce((sum, char) => sum + char.charCodeAt(0), 0);
@@ -29,7 +31,8 @@ const levels = [
       <input type="number" id="height">
     `,
     value: function () { return parseFloat(document.getElementById("height")?.value) || 0; },
-    infoFormat: function () {return this.value() + ' cm'},
+    prefx: '',
+    suffx: ' cm',
     updateSo: function () {
       let value = this.value();
       so.numeroDeOctavas = Math.max(1, Math.min(8, Math.floor(value / 30)));
@@ -42,7 +45,8 @@ const levels = [
       <input type="number" id="weight">
     `,
     value: function () { return parseFloat(document.getElementById("weight")?.value) || 0; },
-    infoFormat: function () {return this.value() + ' kg'},
+    prefx: '',
+    suffx: ' kg',
     updateSo: function () {
       let value = this.value();
       so.duracion = Math.max(10, Math.min(1000, value * 5));
@@ -61,7 +65,8 @@ const levels = [
       </select>
     `,
     value: function () { return document.getElementById("color")?.value || "major"; },
-    infoFormat: function () {return this.value()},
+    prefx: '',
+    suffx: '',
     updateSo: function () {
       let value = this.value();
       const colorToScale = { red: "minor", blue: "major", green: "pentatonic", yellow: "dorian", purple: "phrygian" };
@@ -80,7 +85,8 @@ const levels = [
       </select>
     `,
     value: function () { return document.getElementById("mood")?.value || "calm"; },
-    infoFormat: function () {return this.value()},
+    prefx: '',
+    suffx: '',
     updateSo: function () {
       let value = this.value();
       const moodMap = { happy: 6, calm: 4, sad: 3, angry: 2 };
@@ -100,7 +106,8 @@ const levels = [
       </select>
     `,
     value: function () { return document.getElementById("element")?.value || "air"; },
-    infoFormat: function () {return this.value()},
+    prefx: '',
+    suffx: '',
     updateSo: function () {
       let value = this.value();
       const elementToVol = { fire: 1, water: 0.7, earth: 0.5, air: 0.8, ether: 0.9 };
@@ -114,7 +121,8 @@ const levels = [
       <input type="date" id="birthdate">
     `,
     value: function () { return document.getElementById("birthdate")?.value || ""; },
-    infoFormat: function () {return this.value()},
+    prefx: '',
+    suffx: '',
     updateSo: function () {
       let value = this.value();
       let birthSum = value.split("-").reduce((sum, num) => sum + parseInt(num || 0), 0);
@@ -141,7 +149,8 @@ const levels = [
       </select>
     `,
     value: function () { return document.getElementById("zodiac")?.value || "aries"; },
-    infoFormat: function () {return this.value()},
+    prefx: '',
+    suffx: '',
     updateSo: function () {
       let value = this.value();
       const zodiacTuning = { aries: 45, taurus: 42, gemini: 48, cancer: 36, leo: 52 };
@@ -159,7 +168,8 @@ const levels = [
       </select>
     `,
     value: function () { return document.getElementById("timeOfDay")?.value || "afternoon"; },
-    infoFormat: function () {return this.value()},
+    prefx: '',
+    suffx: '',
     updateSo: function () {
       let value = this.value();
       so.mainVol *= value === "morning" ? 1.2 : value === "night" ? 0.8 : 1;
