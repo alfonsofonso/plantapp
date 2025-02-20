@@ -1,7 +1,7 @@
 const levels = [
   {
-    text: "Welcome! The sound is the same for everyone. Progress to personalize it based on your unique vibration.",
-    input: `<p>Default sound activated. Level up to unlock customization!</p>`,
+    text: "Welcome! The sound is the same for everyone. Progress to personalize it based on your uniqueness.",
+    input: `<p>Level up to unlock customization!</p>`,
     value: function () { return null; },
     infoFormat: function () { return null; },
     updateSo: function () {

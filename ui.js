@@ -25,17 +25,20 @@ const input = document.getElementById("input")
 const mycanvas = document.getElementById("mycanvas")   //no anda
 
 let user = []
+let iNiv = 0;// no llames una variable global i  porfa, colisionan demasiado a menudo
+              /// las globales con nombre propio... muy propio! que significa esta variable? 
+
 //////////////////////////////////////////     functions   //////////////////////////////
-let iNiv = 0;// no llames una variable i global porfa, las globales con nombre propio muy propio! 
 function barAnimation() {
   console.log('baranimation')
   if (iNiv == 0) {
     iNiv = 1;
     var width = 1;
     var id = setInterval(frame, 100);
-    function frame() {
+    
+    function frame() {///// avanza barra
       //console.log(width)
-      if (width >= 1000) {
+      if (width >= 1000) { // si llega al final de la barra
         if (nivel==-1) {
           playButt.style.display="block"
           nivel=0
@@ -43,19 +46,20 @@ function barAnimation() {
         clearInterval(id);
         iNiv = 0;
         width = 1;
-
         if (levels.length > nivel-1) {// que quiere decir esto?
-          playButt.disabled = false;
+         //playButt.style.display = "none";
+         playButt.disabled= false
           levelAlert()
         }
-        return ;// y este return?
-      } else {// y esto?
+        return ;//
+      } else {// sigue creciendo la barra 
         width += barSpeed;
         myBar.style.width = width/10 + "%";
       }
     }
   }
 }
+
 function initHeal(){
   console.log('initheal')
   playButt.disabled = true;
@@ -133,11 +137,7 @@ const levelAlert = () => {
 }
 
 const playClick = () => {
-  if (nivel === -1) {
-    initHeal()
-  } else {
     levelUP()
-  }
 }
 
 
