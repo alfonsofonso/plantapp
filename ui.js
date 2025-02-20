@@ -1,32 +1,19 @@
-
-//////////////////////////////////////////     globales   //////////////////////////////
-
 var nivel = -1;
+var barSpeed=10
 
-var nubes=[];
-var numNubes=5;
-var grupo;
-var barSpeed=100
-
-var escalas=['ionian','melodicminor','wholetone','diminished','blues','pentatonicmajor',
- 'pentatonicminor','flamenco','altered','bebopdominant','bebopdominantflatnine',
- 'bebopmajor','bebopminor','major','major7','major6','dominant','dominantflat5',"augmented",
- 'minor','minor7','minor6','dim','minorflat5','sus4','sus2','fouths','fifth','tritone',
- 'hexatonic','chromatic',"octaves"];
-var nombresNotas=["C", "Db", "D", "Eb", "E","F", "Gb", "G", "Ab", "A", "Bb", "B" ];
-
-//////////////////////////////////////////     instrumentos   //////////////////////////////
 const myBar = document.getElementById("myBar");
 const playButt = document.getElementById('playButt')
 const myProgress = document.getElementById('myProgress')
 const userData = document.getElementById("userdata")
-const text = document.getElementById("text")
+/* const text = document.getElementById("text")
+ */const showText = document.getElementById("showText")
 const input = document.getElementById("input")
+const levelLog = document.getElementById("levelLog");
 const mycanvas = document.getElementById("mycanvas")   //no anda
 
-let user = []
-//////////////////////////////////////////     functions   //////////////////////////////
+let user = [];
 let i = 0;
+
 function barAnimation() {
   console.log('baranimation')
   if (i == 0) {
@@ -36,20 +23,18 @@ function barAnimation() {
     function frame() {
       //console.log(width)
       if (width >= 1000) {
+        playButt.style.display="block";
         if (nivel==-1) {
-          playButt.style.display="block"
-          nivel=0
+          nivel = 0;
         }
         clearInterval(id);
         i = 0;
         width = 1;
-
-        if (levels.length > nivel-1) {// que quiere decir esto?
-          playButt.disabled = false;
+        if (levels.length > nivel-1) {// que quiere decir esto? SI QUEDAN NIVELES EN ARRAY
           levelAlert()
         }
-        return ;// y este return?
-      } else {// y esto?
+        //return ;// y este return? SALES DEL IF LA BARRA ESTA LLENA
+      } else {// y esto? LA BARRA SIGUE LLENANDOSE
         width += barSpeed;
         myBar.style.width = width/10 + "%";
       }
@@ -65,48 +50,21 @@ function initHeal(){
 	}
   nivel = 0;
   barAnimation()
+  levelLog.innerHTML = nivel;
 	creaArr();// iniciar sonido
 }
 
-function creaArr(){//n=num notas	
-	grupo=new group();
-	for(var i=0;i<so.numNubes;i++){
-		nubes[i]=new track(); ///lissajousJS
-		var d=eval("walk."+yuxtapon(so.aroma)+"("+so.notaBase+","+so.numeroDeOctavas+")");
-		nubes[i].beat(so.duracion).notes(d).nl(so.duracion)
-			.adsr(so.duracion/4,so.duracion/3,.6,so.duracion/2).vol(so.mainVol*0.25/nubes.length)
-			.trans(Math.random()/10);
-		grupo.add(nubes[i]);
-	};
-	console.log("nubes: "+so.numNubes+" dur: "+so.duracion+" aroma: "+so.aroma)
-  //return [so]
-
-}
-yuxtapon=function(q){///???
- return q=q.replace(/\s/g, '');
-
-}
-function destruyeArr(){// vacia nubes
-	console.log("diluyo nubes: "+nubes.length)
-	for(var i=0;i<nubes.length;i++){
-		nubes[i].destroy();
-		delete nubes[i];
-	};	
-	nubes=[];
-}
-
-
-//////////////////////////////////////////     start    //////////////////////////////
-
-
-function addVariable(){
+function addLog(lvl, value){
+  console.log(lvl, value);
+  console.log(levels[lvl]);
   let li = document.createElement("li");
-  li.className = "userInfo";
-  if (levels[nivel].infoFormat()) {
-    li.innerText = levels[nivel].infoFormat();
+  li.className = "userLog";
+  if (value) {
+    li.innerText = levels[lvl].prefx + value + levels[lvl].suffx;
     userData.appendChild(li);
   }
 }
+
 const levelUP = () => {
   const newValue = levels[nivel].value();
   user.push(newValue)
@@ -118,16 +76,20 @@ const levelUP = () => {
   playButt.disabled = true;
   levels[nivel].updateSo()
   console.log(so);
-  addVariable()
+  localStorage.setItem('data', JSON.stringify({user: user, so: so}))
+  addLog(nivel, newValue)
+  levelLog.innerHTML = nivel;
   nivel++;
   /* mycanvas.style.opacity = 1; */           //no anda
 }
+
 const levelAlert = () => {
   console.log('alert from level ', nivel);
   text.innerText = levels[nivel].text;
   input.innerHTML = levels[nivel].input;
   text.style.display = 'block';
   input.style.display = 'block';
+  playButt.disabled = false;
  /*  mycanvas.style.opacity = 0.5; */
   /* playButt.onclick = levelUP; */
 }
@@ -140,6 +102,21 @@ const playClick = () => {
   }
 }
 
+const loadGame = () => {
+  const data = JSON.parse(localStorage.getItem("data"));
+  console.log("aqui nos quedamos", data);
+  so = data.so;
+  user = data.user;
+  nivel = user.length - 1;
+  levelLog.innerHTML = nivel;
+  for (let u = 0; u < user.length; u++) {
+    const log = user[u];
+    if (log !== null) {
+      addLog(u, log)
+    }
+  };
+}
+
 onload=function(){
 	initVisual();
   context.resume();
@@ -147,13 +124,30 @@ onload=function(){
   barAnimation();
   info()// un console log
   console.log(this.localStorage);
-  //initHeal()
-
   if (this.localStorage.length === 0) {
     console.log('new session');
   } else {
-    const data = JSON.parse(localStorage.getItem("data"));
-    console.log("aqui nos quedamos",data);
-    //so = data.so; borrado porque daba error
+    loadGame()
   }
 }
+
+const resetLocalStorage = () => {
+  console.log('reset data')
+  localStorage.removeItem("data");
+  console.log(localStorage);
+  location.reload();
+}
+/* 
+showText.addEventListener("mousedown", () => {
+  text.style.display = "block";
+});
+
+// Hide text when released
+showText.addEventListener("mouseup", () => {
+  text.style.display = "none";
+});
+
+// Also hide when mouse leaves the button
+showText.addEventListener("mouseleave", () => {
+  text.style.display = "none";
+}); */

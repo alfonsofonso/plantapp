@@ -8,7 +8,11 @@
 <body>
   <canvas id="micanvas"></canvas>
   <div class="screen">
-    <ul id="userdata"></ul>
+    <div onclick="resetLocalStorage()">RESET</div>
+    <!-- <div id="showText" >INFO</div> -->
+    <ul id="userdata">
+      <li class="userLog">LV <span id="levelLog"></span></li>
+    </ul>
     <div class="centered glow">
       <div id="text"></div>
       <div id="input"></div>
@@ -48,6 +52,7 @@
   <script src="laJS/visual.js"></script>
   <script src="laJS/planets.js"></script>
   <script src="arbol.js"></script>
+  <script src="soundFONSO.js"></script>
   <script src="ui.js"></script>
   <script src="juabascri/p5.js"></script>
   <script src="juabascri/p5.sound.js"></script>
