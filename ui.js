@@ -26,11 +26,11 @@ const mycanvas = document.getElementById("mycanvas")   //no anda
 
 let user = []
 //////////////////////////////////////////     functions   //////////////////////////////
-let i = 0;
+let iNiv = 0;// no llames una variable i global porfa, las globales con nombre propio muy propio! 
 function barAnimation() {
   console.log('baranimation')
-  if (i == 0) {
-    i = 1;
+  if (iNiv == 0) {
+    iNiv = 1;
     var width = 1;
     var id = setInterval(frame, 100);
     function frame() {
@@ -41,7 +41,7 @@ function barAnimation() {
           nivel=0
         }
         clearInterval(id);
-        i = 0;
+        iNiv = 0;
         width = 1;
 
         if (levels.length > nivel-1) {// que quiere decir esto?
@@ -117,7 +117,7 @@ const levelUP = () => {
   input.style.display = 'none';
   playButt.disabled = true;
   levels[nivel].updateSo()
-  console.log(so);
+  if(nivel==0){initHeal()}
   addVariable()
   nivel++;
   /* mycanvas.style.opacity = 1; */           //no anda

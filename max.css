@@ -105,12 +105,15 @@ input[type="text"]{
   z-index: 1312;
 }
 .glow {
-  color: #fff;
+ /*  color: #fff;
   text-align: center;
   -webkit-animation: glow 5s ease-in-out infinite alternate;
   -moz-animation: glow 5s ease-in-out infinite alternate;
   animation:  glow 5s ease-in-out infinite alternate,
-              fadeIn 3s ease-in;
+              fadeIn 3s ease-in; 
+              
+              lamento comunicarte las malas noticias por aqui :P  pero el alpha esta prohibido en js y css.. 
+              empeora la performance de la gràfica una barbarida! */
 }
 
 @keyframes glow {
